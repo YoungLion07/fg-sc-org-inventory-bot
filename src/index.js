@@ -27,6 +27,7 @@ function isOurGuild(guildId) {
 
 client.once(Events.ClientReady, async (c) => {
   console.log(`Logged in as ${c.user.tag}`);
+  console.log(`Member roles: ${config.memberRoleNames.join(', ')} · Officer roles: ${config.officerRoleNames.join(', ')} · Admiral role: ${config.admiralRoleName}`);
   try {
     const guild = await c.guilds.fetch(config.guildId);
     const result = await members.syncAllMembers(guild);

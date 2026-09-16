@@ -1,7 +1,7 @@
 'use strict';
 
 // Keeps the `members` table in sync with Discord roles.
-// A member is anyone holding at least one of MEMBER_ROLE_NAMES (holding both is fine too).
+// A member is anyone holding at least one of MEMBER_ROLE_NAMES (holding several is fine too).
 
 const { config } = require('../config');
 const { query } = require('../db');

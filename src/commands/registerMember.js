@@ -7,7 +7,7 @@ const {
   ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, LabelBuilder,
   ModalBuilder, TextInputBuilder, TextInputStyle, UserSelectMenuBuilder,
 } = require('discord.js');
-const { config } = require('../config');
+const { config, formatRoles } = require('../config');
 const members = require('../services/members');
 const { postLog } = require('../services/logs');
 const { getSetting, setSetting } = require('../services/settings');
@@ -27,7 +27,7 @@ function panelMessage() {
       + '**1.** Click **Register member**\n'
       + '**2.** Pick the member from the list\n'
       + '**3.** Type their gamertag and submit\n\n'
-      + `The member needs one of these roles: ${config.memberRoleNames.map((r) => `**${r}**`).join(' or ')}. `
+      + `The member needs one of these roles: ${formatRoles(config.memberRoleNames, (r) => `**${r}**`)}. `
       + 'Registering someone who already has a gamertag replaces it. Every change is recorded in the logs.',
     );
   const row = new ActionRowBuilder().addComponents(
@@ -60,7 +60,7 @@ function buildModal() {
     .addLabelComponents(
       new LabelBuilder()
         .setLabel('Discord member')
-        .setDescription(`Must have the ${config.memberRoleNames.join(' or ')} role`)
+        .setDescription(`Must have the ${formatRoles(config.memberRoleNames)} role`.slice(0, 100))
         .setUserSelectMenuComponent(
           new UserSelectMenuBuilder().setCustomId('member').setMinValues(1).setMaxValues(1).setRequired(true),
         ),

@@ -23,7 +23,8 @@ const config = {
     ...list(process.env.OFFICER_ROLE_NAMES, 'officer-sc,officer'),
     ...list(process.env.OFFICER_ROLE_NAME, ''),
   ]),
-  memberRoleNames: list(process.env.MEMBER_ROLE_NAMES, 'Star Citizen,Organization-SC'),
+  // Anyone holding at least one of these is an org member.
+  memberRoleNames: list(process.env.MEMBER_ROLE_NAMES, 'Star Citizen,Organization-SC,Organization'),
   // The only role allowed to run /wipe-inventory (full reset after a game wipe).
   admiralRoleName: (process.env.ADMIRAL_ROLE_NAME || 'Admiral of Combat').trim(),
 
@@ -57,4 +58,10 @@ function requireConfig(keys) {
   }
 }
 
-module.exports = { config, requireConfig };
+/** ["A", "B", "C"] -> "A, B or C" (optionally wrapping each name, e.g. in **bold**). */
+function formatRoles(names, wrap = (n) => n) {
+  const parts = names.map(wrap);
+  return parts.length > 1 ? `${parts.slice(0, -1).join(', ')} or ${parts.at(-1)}` : parts.join('');
+}
+
+module.exports = { config, requireConfig, formatRoles };

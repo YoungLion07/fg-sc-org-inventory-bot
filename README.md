@@ -35,7 +35,7 @@ The bot reads Discord roles, so there's nothing extra to sign up for.
 |---|---|
 | **Admiral of Combat** | Wipe the inventory after a game wipe, undo a wipe, see the wipe history |
 | **Officer** (`officer-sc` **or** `officer`) | Add, remove and move inventory; register members' gamertags; set up the channels; see the wipe history |
-| **Org member** (`Star Citizen` **and/or** `Organization-SC`) | Set their own gamertag; manage their own blueprint list; look up anyone's blueprints; read `#logs` |
+| **Org member** (any of `Star Citizen`, `Organization-SC`, `Organization`) | Set their own gamertag; manage their own blueprint list; look up anyone's blueprints; read `#logs` |
 | **Everyone else** (guests) | Nothing. The inventory channels are hidden from them. |
 
 A person can hold several of these roles. For example, an officer who also has `Star Citizen` counts as both an officer and a member.
@@ -133,7 +133,7 @@ You get a private summary, then press **Confirm**. `#logs` shows:
 **Good to know**
 
 - **Same item, owner, place, Personal/Org and quality means one record.** Adding more just raises the amount. The same ore at a different quality reading is kept as a separate batch.
-- **The owner must be an org member.** They need the `Star Citizen` or `Organization-SC` role.
+- **The owner must be an org member.** They need the `Star Citizen`, `Organization-SC` or `Organization` role.
 
 ---
 
@@ -231,7 +231,7 @@ If the member already had a gamertag, it's replaced, and the log shows the old a
 
 **Rules**
 
-- **Who can be registered:** the member needs the `Star Citizen` or `Organization-SC` role.
+- **Who can be registered:** the member needs the `Star Citizen`, `Organization-SC` or `Organization` role.
 - **Allowed characters:** letters, numbers, `-` and `_`.
 - **One owner per gamertag:** each gamertag can belong to only one member (capital letters don't matter).
 
@@ -405,7 +405,7 @@ List the last 25 wipes: number, date (in your own time zone), type, who ran it, 
   - Type the raw reading from the game (1–1000). The bot turns it into a tier (F, E, D, C, B, A, S or Perfect) using that material's own thresholds.
   - Example: Laranite 920 is A-tier; 975 or higher is S-tier.
 - **Members are synced with Discord roles automatically.**
-  - Someone who loses both member roles, or leaves the server, is marked inactive.
+  - Someone who loses all their member roles, or leaves the server, is marked inactive.
   - They're never deleted, so their history stays.
   - New items can't be given to inactive members.
 - **Blueprint changes aren't posted to `#logs`,** to keep that channel about inventory.
@@ -444,7 +444,7 @@ It takes about 20 minutes and needs no coding. You'll use the Discord Developer 
    `https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot%20applications.commands&permissions=2416176144`
 
 6. **Get your server's ID.** In Discord, turn on **User Settings → Advanced → Developer Mode**, then right-click your server icon → **Copy Server ID**. This is your `DISCORD_GUILD_ID`.
-7. **Put the bot's role high enough.** In **Server Settings → Roles**, drag the bot's role **above** `officer-sc`, `officer`, `Star Citizen`, `Organization-SC` and `Admiral of Combat`. A bot can only manage permissions for roles below its own.
+7. **Put the bot's role high enough.** In **Server Settings → Roles**, drag the bot's role **above** `officer-sc`, `officer`, `Star Citizen`, `Organization-SC`, `Organization` and `Admiral of Combat`. A bot can only manage permissions for roles below its own.
 
 ### Step 2: Put the code on GitHub
 
@@ -469,7 +469,7 @@ It takes about 20 minutes and needs no coding. You'll use the Discord Developer 
    | `DISCORD_GUILD_ID` | the Server ID from Step 1.6 |
    | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` (type it exactly like this) |
    | `OFFICER_ROLE_NAMES` | `officer-sc,officer` |
-   | `MEMBER_ROLE_NAMES` | `Star Citizen,Organization-SC` |
+   | `MEMBER_ROLE_NAMES` | `Star Citizen,Organization-SC,Organization` |
    | `ADMIRAL_ROLE_NAME` | `Admiral of Combat` (optional; this is the default) |
 
    Role names must match your server exactly, including capital letters.
@@ -479,6 +479,7 @@ It takes about 20 minutes and needs no coding. You'll use the Discord Developer 
    ```
    Database schema is up to date.
    Seed data loaded (categories: 6, subcategories: 86, items: 291, ...).
+   Member roles: Star Citizen, Organization-SC, Organization · Officer roles: officer-sc, officer · Admiral role: Admiral of Combat
    Registered 9 commands: /setup-server, /add-item, /remove-item, /transfer-item, /set-handle, /blueprint, /wipe-inventory, /wipe-revert, /wipe-history
    Logged in as Org Inventory#1234
    Roster synced: 112 active members, 0 marked inactive.

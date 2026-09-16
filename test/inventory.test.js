@@ -786,6 +786,25 @@ describe('inventory bot (database)', { skip }, () => {
       assert.equal((hist2.calls.reply[0].embeds[0].toJSON().description.match(/↩️ Reverted by Admiral Kane on <t:\d+:f>/g) || []).length, 4);
     });
 
+    test('Star Citizen, Organization-SC and Organization all count as members', async () => {
+      const members = require('../src/services/members');
+      const { requireActiveMember } = require('../src/lib/discord');
+      for (const role of ['Star Citizen', 'Organization-SC', 'Organization']) {
+        assert.equal(members.isOrgMember(fakeGuildMember('1', 'A', [role])), true, role);
+      }
+      assert.equal(members.isOrgMember(fakeGuildMember('2', 'B', ['Organization-Guest'])), false, 'names must match exactly');
+      const NEWBIE = '100000000000000009';
+      const newbie = fakeGuildMember(NEWBIE, 'Newbie', ['Organization']);
+      const gm = await requireActiveMember({ members: { fetch: async () => newbie } }, { id: NEWBIE, bot: false }, 'That member');
+      assert.equal(gm, newbie);
+      assert.equal((await members.getMember(NEWBIE)).active, true);
+      const nobody = fakeGuildMember('100000000000000010', 'Nobody', []);
+      await assert.rejects(
+        requireActiveMember({ members: { fetch: async () => nobody } }, { id: nobody.id, bot: false }, 'You'),
+        /you need the Star Citizen, Organization-SC or Organization role/,
+      );
+    });
+
     test('officer-sc and officer both count as officers', async () => {
       const members = require('../src/services/members');
       const { requireOfficer } = require('../src/lib/discord');

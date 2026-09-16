@@ -3,7 +3,7 @@
 const {
   ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags,
 } = require('discord.js');
-const { config } = require('../config');
+const { config, formatRoles } = require('../config');
 const { UserError } = require('./errors');
 const { getChannelId } = require('../services/settings');
 const members = require('../services/members');
@@ -20,7 +20,7 @@ const COLORS = {
 /** Throws unless the person running the command holds the officer role. */
 function requireOfficer(interaction) {
   if (!interaction.member || !members.isOfficer(interaction.member)) {
-    throw new UserError(`Only officers can do this (${config.officerRoleNames.map((r) => `**${r}**`).join(' or ')} role).`);
+    throw new UserError(`Only officers can do this (${formatRoles(config.officerRoleNames, (r) => `**${r}**`)} role).`);
   }
 }
 
@@ -52,7 +52,7 @@ async function requireActiveMember(guild, user, label = 'That person') {
   if (!gm) throw new UserError(`${label} isn't in this server.`);
   const active = await members.upsertMember(gm);
   if (!active) {
-    const roles = config.memberRoleNames.join(' or ');
+    const roles = formatRoles(config.memberRoleNames);
     throw new UserError(label === 'You'
       ? `This is only for org members — you need the ${roles} role.`
       : `${label} (${members.displayName(gm)}) isn't an org member — they need the ${roles} role.`);

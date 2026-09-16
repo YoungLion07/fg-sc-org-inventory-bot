@@ -7,7 +7,7 @@ const TEST_URL = process.env.TEST_DATABASE_URL;
 if (TEST_URL) {
   process.env.DATABASE_URL = TEST_URL;
   process.env.OFFICER_ROLE_NAMES = 'officer-sc,officer';
-  process.env.MEMBER_ROLE_NAMES = 'Star Citizen,Organization-SC';
+  process.env.MEMBER_ROLE_NAMES = 'Star Citizen,Organization-SC,Organization';
 }
 
 const skip = TEST_URL ? false : 'set TEST_DATABASE_URL to a throwaway database to run these tests';
