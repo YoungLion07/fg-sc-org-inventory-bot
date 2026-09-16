@@ -16,7 +16,12 @@ function isOrgMember(guildMember) {
 }
 
 function isOfficer(guildMember) {
-  return roleNames(guildMember).includes(config.officerRoleName);
+  const names = roleNames(guildMember);
+  return config.officerRoleNames.some((n) => names.includes(n));
+}
+
+function isAdmiral(guildMember) {
+  return roleNames(guildMember).includes(config.admiralRoleName);
 }
 
 function displayName(guildMember) {
@@ -96,17 +101,49 @@ async function getMember(userId) {
   return rows[0] || null;
 }
 
-async function setRsiHandle(userId, handle) {
-  const { rowCount } = await query(
-    `UPDATE members SET rsi_handle = $2, updated_at = now() WHERE member_id = $1`,
+const HANDLE_PATTERN = /^[A-Za-z0-9_-]{2,60}$/;
+
+/** Cleans up and validates an RSI handle. Throws a UserError with a readable message. */
+function normalizeHandle(raw) {
+  const { UserError } = require('../lib/errors');
+  const handle = String(raw || '').trim();
+  if (!HANDLE_PATTERN.test(handle)) {
+    throw new UserError('RSI handles are 2–60 characters and can only contain letters, numbers, dashes, and underscores.');
+  }
+  return handle;
+}
+
+/**
+ * Saves a member's RSI handle. Refuses a handle that's already registered to someone else
+ * (ignoring capitals). Returns the previous handle (or null).
+ */
+async function setRsiHandle(userId, rawHandle) {
+  const { UserError } = require('../lib/errors');
+  const handle = normalizeHandle(rawHandle);
+  const { rows: taken } = await query(
+    `SELECT member_id, discord_username FROM members
+      WHERE lower(rsi_handle) = lower($1) AND member_id <> $2`,
+    [handle, userId],
+  );
+  if (taken[0]) {
+    throw new UserError(`The handle **${handle}** is already registered to **${taken[0].discord_username}**.`);
+  }
+  const { rows } = await query(
+    `UPDATE members m SET rsi_handle = $2, updated_at = now()
+       FROM (SELECT rsi_handle AS old_handle FROM members WHERE member_id = $1) old
+      WHERE m.member_id = $1
+      RETURNING old.old_handle`,
     [userId, handle],
   );
-  return rowCount > 0;
+  if (!rows[0]) throw new UserError('That member isn\'t on the roster yet.');
+  return { handle, previous: rows[0].old_handle };
 }
 
 module.exports = {
+  normalizeHandle,
   isOrgMember,
   isOfficer,
+  isAdmiral,
   displayName,
   upsertMember,
   syncMember,

@@ -20,7 +20,14 @@ const COLORS = {
 /** Throws unless the person running the command holds the officer role. */
 function requireOfficer(interaction) {
   if (!interaction.member || !members.isOfficer(interaction.member)) {
-    throw new UserError(`Only members with the **${config.officerRoleName}** role can do this.`);
+    throw new UserError(`Only officers can do this (${config.officerRoleNames.map((r) => `**${r}**`).join(' or ')} role).`);
+  }
+}
+
+/** Throws unless the person holds the Admiral role (the only role that can wipe the system). */
+function requireAdmiral(interaction) {
+  if (!interaction.member || !members.isAdmiral(interaction.member)) {
+    throw new UserError(`Only members with the **${config.admiralRoleName}** role can do this.`);
   }
 }
 
@@ -45,9 +52,10 @@ async function requireActiveMember(guild, user, label = 'That person') {
   if (!gm) throw new UserError(`${label} isn't in this server.`);
   const active = await members.upsertMember(gm);
   if (!active) {
-    throw new UserError(
-      `${label} (${members.displayName(gm)}) isn't an org member — they need one of these roles: ${config.memberRoleNames.join(', ')}.`,
-    );
+    const roles = config.memberRoleNames.join(' or ');
+    throw new UserError(label === 'You'
+      ? `This is only for org members — you need the ${roles} role.`
+      : `${label} (${members.displayName(gm)}) isn't an org member — they need the ${roles} role.`);
   }
   return gm;
 }
@@ -91,6 +99,7 @@ module.exports = {
   EPHEMERAL,
   COLORS,
   requireOfficer,
+  requireAdmiral,
   requireChannel,
   requireActiveMember,
   confirmRow,

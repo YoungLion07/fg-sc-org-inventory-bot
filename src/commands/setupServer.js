@@ -7,6 +7,7 @@ const { config } = require('../config');
 const { getChannelId, setChannelId, getSetting, setSetting } = require('../services/settings');
 const { UserError } = require('../lib/errors');
 const { EPHEMERAL, requireOfficer } = require('../lib/discord');
+const registerMember = require('./registerMember');
 
 const data = new SlashCommandBuilder()
   .setName('setup-server')
@@ -23,6 +24,7 @@ const BOT = [P.ViewChannel, P.ReadMessageHistory, P.SendMessages, P.EmbedLinks, 
  *  - input/output: officers only
  *  - logs/board:   org members can read, only the bot posts
  *  - tickets:      org members can read and run commands
+ *  - register:     officers only, read-only; holds the "Register member" button panel
  */
 const LAYOUT = [
   { purpose: 'input', topic: 'Officers: /add-item — stock coming into the pool', officers: USE, members: null },
@@ -30,17 +32,21 @@ const LAYOUT = [
   { purpose: 'logs', topic: 'Automatic history of every inventory change (read-only)', officers: READ, members: READ, readOnly: true },
   { purpose: 'board', topic: 'Live org inventory board (read-only)', officers: READ, members: READ, readOnly: true },
   { purpose: 'tickets', topic: 'Members: request an add / remove / transfer for officer review', officers: USE, members: USE },
+  { purpose: 'register', topic: 'Officers: link a Discord member to their in-game gamertag (RSI handle)', officers: READ, members: null, readOnly: true },
 ];
 
-function overwritesFor(entry, guild, botId, officerRole, memberRoles) {
+function overwritesFor(entry, guild, botId, officerRoles, memberRoles) {
   const deny = [P.ViewChannel];
   const list = [
     { id: guild.roles.everyone.id, deny },
     { id: botId, allow: BOT },
-    { id: officerRole.id, allow: entry.officers, deny: entry.readOnly ? [P.SendMessages] : [] },
   ];
+  for (const role of officerRoles) {
+    list.push({ id: role.id, allow: entry.officers, deny: entry.readOnly ? [P.SendMessages] : [] });
+  }
+  const officerIds = new Set(officerRoles.map((r) => r.id));
   for (const role of memberRoles) {
-    if (role.id === officerRole.id) continue;
+    if (officerIds.has(role.id)) continue;
     if (entry.members) {
       list.push({ id: role.id, allow: entry.members, deny: entry.readOnly ? [P.SendMessages] : [] });
     }
@@ -71,8 +77,12 @@ async function execute(interaction) {
   await guild.roles.fetch();
   await guild.channels.fetch();
 
-  const officerRole = guild.roles.cache.find((r) => r.name === config.officerRoleName);
-  if (!officerRole) throw new UserError(`Couldn't find a role named **${config.officerRoleName}**.`);
+  const findRoles = (names) => names.map((n) => guild.roles.cache.find((r) => r.name === n)).filter(Boolean);
+  const officerRoles = findRoles(config.officerRoleNames);
+  if (!officerRoles.length) {
+    throw new UserError(`Couldn't find any officer role (looked for ${config.officerRoleNames.map((r) => `**${r}**`).join(', ')}).`);
+  }
+  const missingOfficerRoles = config.officerRoleNames.filter((n) => !guild.roles.cache.some((r) => r.name === n));
   const memberRoles = config.memberRoleNames
     .map((n) => guild.roles.cache.find((r) => r.name === n))
     .filter(Boolean);
@@ -85,10 +95,11 @@ async function execute(interaction) {
 
   const category = await ensureCategory(guild);
   const lines = [];
+  let registerChannel = null;
 
   for (const entry of LAYOUT) {
     const name = config.channels[entry.purpose];
-    const permissionOverwrites = overwritesFor(entry, guild, interaction.client.user.id, officerRole, memberRoles);
+    const permissionOverwrites = overwritesFor(entry, guild, interaction.client.user.id, officerRoles, memberRoles);
 
     const storedId = await getChannelId(entry.purpose);
     let channel = storedId ? guild.channels.cache.get(storedId) : null;
@@ -113,10 +124,23 @@ async function execute(interaction) {
       });
     }
     await setChannelId(entry.purpose, channel.id);
+    if (entry.purpose === 'register') registerChannel = channel;
     lines.push(`• <#${channel.id}> — ${status}, permissions applied`);
   }
 
-  let message = `**Inventory channels are ready** (under **${category.name}**):\n${lines.join('\n')}`;
+  let panelNote = '';
+  try {
+    await registerMember.ensurePanel(registerChannel);
+    panelNote = `\nThe **Register member** button is posted and pinned in <#${registerChannel.id}>.`;
+  } catch (err) {
+    console.error('Could not post the register panel:', err);
+    panelNote = `\n⚠️ Couldn't post the **Register member** button in <#${registerChannel.id}> — check the bot can send messages there, then run this again.`;
+  }
+
+  let message = `**Inventory channels are ready** (under **${category.name}**):\n${lines.join('\n')}${panelNote}`;
+  if (missingOfficerRoles.length) {
+    message += `\n\n⚠️ Couldn't find these officer roles, so they weren't given access: ${missingOfficerRoles.join(', ')}. Check the OFFICER_ROLE_NAMES setting matches your role names exactly.`;
+  }
   if (missingRoles.length) {
     message += `\n\n⚠️ Couldn't find these member roles, so they weren't given access: ${missingRoles.join(', ')}. Check the MEMBER_ROLE_NAMES setting matches your role names exactly.`;
   }

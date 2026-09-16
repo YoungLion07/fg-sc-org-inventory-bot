@@ -50,12 +50,14 @@ describe('inventory bot (database)', { skip }, () => {
 
   test('seed loaded the full catalog and locations pool', async () => {
     const counts = {};
-    for (const t of ['categories', 'subcategories', 'items', 'ore_mineral_quality', 'systems', 'planets', 'location_types', 'locations']) {
+    for (const t of ['categories', 'subcategories', 'items', 'ore_mineral_quality', 'systems', 'planets', 'location_types', 'locations',
+      'blueprint_categories', 'blueprint_subcategories', 'blueprints']) {
       const { rows } = await db.query(`SELECT count(*)::int AS n FROM ${t}`);
       counts[t] = rows[0].n;
     }
     assert.deepEqual(counts, {
       categories: 6, subcategories: 86, items: 291, ore_mineral_quality: 36, systems: 4, planets: 13, location_types: 10, locations: 108,
+      blueprint_categories: 8, blueprint_subcategories: 35, blueprints: 1606,
     });
   });
 
@@ -337,6 +339,471 @@ describe('inventory bot (database)', { skip }, () => {
       const btn = fakeInteraction({ user: { id: OFFICER }, member: officerGm, guildMembers, channelId: 'chan-output', logSink: logs });
       await transferItem.confirm(btn, pending.action);
       assert.match(logs[0], /moved 2 SCU Titanium \(A-tier, 930\): \*\*Alice\*\* → \*\*Bob\*\* · org → personal/);
+    });
+
+    test('register panel: officers pick a member and set their gamertag', async () => {
+      const registerMember = require('../src/commands/registerMember');
+      const members = require('../src/services/members');
+      const logs = [];
+
+      const clickAs = (gm) => {
+        const i = fakeInteraction({ user: { id: gm.id }, member: gm, guildMembers, channelId: 'chan-register', logSink: logs });
+        i.customId = 'register:open';
+        i.isButton = () => true;
+        i.isModalSubmit = () => false;
+        i.modals = [];
+        i.showModal = async (m) => { i.modals.push(m.toJSON()); };
+        return i;
+      };
+      const submitAs = (gm, memberId, handle) => {
+        const i = fakeInteraction({ user: { id: gm.id }, member: gm, guildMembers, channelId: 'chan-register', logSink: logs });
+        i.customId = 'register:submit';
+        i.isButton = () => false;
+        i.isModalSubmit = () => true;
+        i.fields = {
+          getSelectedUsers: () => new (require('discord.js').Collection)([[memberId, { id: memberId, bot: false }]]),
+          getTextInputValue: () => handle,
+        };
+        return i;
+      };
+
+      // Non-officers can't even open the form.
+      await assert.rejects(registerMember.handleInteraction(clickAs(aliceGm)), /officer-sc/);
+
+      const click = clickAs(officerGm);
+      assert.equal(await registerMember.handleInteraction(click), true);
+      assert.equal(click.modals[0].custom_id, 'register:submit');
+
+      // First registration.
+      const first = submitAs(officerGm, ALICE, '  Nightfall_77 ');
+      await registerMember.handleInteraction(first);
+      assert.match(first.calls.reply[0].content, /Alice\*\* is now registered as \*\*Nightfall_77/);
+      assert.equal((await members.getMember(ALICE)).rsi_handle, 'Nightfall_77');
+      assert.match(logs.at(-1), /Officer Sagi\*\* registered \*\*Alice\*\* as \*\*Nightfall_77/);
+
+      // Same value again: nothing changes and nothing is logged.
+      const logCount = logs.length;
+      const same = submitAs(officerGm, ALICE, 'Nightfall_77');
+      await registerMember.handleInteraction(same);
+      assert.match(same.calls.reply[0].content, /already registered/);
+      assert.equal(logs.length, logCount);
+
+      // Changing it records old -> new.
+      await registerMember.handleInteraction(submitAs(officerGm, ALICE, 'Nightfall_78'));
+      assert.match(logs.at(-1), /changed \*\*Alice\*\*'s gamertag: Nightfall_77 → \*\*Nightfall_78/);
+
+      // Guards: taken handle (any capitals), non-member, bad characters, non-officer submit.
+      await assert.rejects(registerMember.handleInteraction(submitAs(officerGm, BOB, 'nightfall_78')), /already registered to \*\*Alice/);
+      await assert.rejects(registerMember.handleInteraction(submitAs(officerGm, GUEST, 'Guesty')), /isn't an org member/);
+      await assert.rejects(registerMember.handleInteraction(submitAs(officerGm, BOB, 'bad name!')), /only contain letters/);
+      await assert.rejects(registerMember.handleInteraction(submitAs(aliceGm, BOB, 'Sneaky')), /officer-sc/);
+
+      // Other interactions are left alone.
+      const other = clickAs(officerGm);
+      other.customId = 'confirm:abc';
+      assert.equal(await registerMember.handleInteraction(other), false);
+    });
+
+    test('/set-handle: members set only their own, with the same rules', async () => {
+      const setHandle = require('../src/commands/setHandle');
+      const members = require('../src/services/members');
+      const run = (gm, handle) => {
+        const i = fakeInteraction({ user: { id: gm.id }, member: gm, guildMembers, channelId: 'anywhere', options: { handle } });
+        return setHandle.execute(i).then(() => i);
+      };
+      const ok = await run(plainGm, 'BobInSpace');
+      assert.match(ok.calls.reply[0].content, /BobInSpace/);
+      assert.equal((await members.getMember(BOB)).rsi_handle, 'BobInSpace');
+      await assert.rejects(run(plainGm, 'NIGHTFALL_78'), /already registered to \*\*Alice/);
+      await assert.rejects(run(guestGm, 'Guesty'), /Only org members/);
+    });
+
+    test('/blueprint: members record their own blueprints and anyone in the org can look them up', async () => {
+      const blueprint = require('../src/commands/blueprint');
+      const bps = require('../src/services/blueprints');
+
+      const run = async (gm, sub, options = {}) => {
+        const i = fakeInteraction({ user: { id: gm.id }, member: gm, guildMembers, channelId: 'anywhere', options });
+        i.options.getSubcommand = () => sub;
+        await blueprint.execute(i);
+        return i;
+      };
+      const complete = async (gm, sub, focusedName, value, options = {}) => {
+        let out;
+        const i = fakeInteraction({ user: { id: gm.id }, member: gm, guildMembers, channelId: 'anywhere', options });
+        i.options.getSubcommand = () => sub;
+        i.options.getFocused = () => ({ name: focusedName, value });
+        i.respond = async (choices) => { out = choices; };
+        await blueprint.autocomplete(i);
+        return out;
+      };
+
+      // Pool search, optionally narrowed by category; ship components show size and grade.
+      const js400 = (await complete(aliceGm, 'add', 'blueprint', 'JS-400')).find((c) => c.name.startsWith('JS-400'));
+      assert.equal(js400.name, 'JS-400 · S2 · Grade 1 · Power Plants');
+      const pistols = await complete(aliceGm, 'add', 'blueprint', 'Arclight', { category: 'BS401' });
+      assert.ok(pistols.length >= 7 && pistols.every((c) => c.name.includes('Pistols')));
+      const serac = await complete(aliceGm, 'add', 'blueprint', 'Serac');
+      assert.equal(serac.length, 2);
+      assert.notEqual(serac[0].name, serac[1].name, 'repeated names are told apart');
+
+      // Add, add again (no duplicate), list.
+      const added = await run(aliceGm, 'add', { blueprint: js400.value });
+      assert.match(added.calls.reply[0].content, /Added to your blueprint list/);
+      assert.match(added.calls.reply[0].content, /materials: Beryl, Savrilium, Stileron/);
+      const again = await run(aliceGm, 'add', { blueprint: js400.value });
+      assert.match(again.calls.reply[0].content, /already on your list/);
+      await run(aliceGm, 'add', { blueprint: pistols[0].value, category: 'BS401' });
+
+      const mine = await run(aliceGm, 'list');
+      const listEmbed = mine.calls.reply[0].embeds[0].toJSON();
+      assert.match(listEmbed.title, /Your blueprints \(2\)/);
+      assert.match(listEmbed.description, /\*\*Ship Components › Power Plants\*\*\n• JS-400 · S2 · Grade 1/);
+
+      // Who can craft it — visible to other members, with gamertags.
+      const whoRes = await run(plainGm, 'who', { blueprint: js400.value });
+      const whoText = whoRes.calls.reply[0].embeds[0].toJSON().description;
+      assert.match(whoText, /1 member can craft it/);
+      assert.match(whoText, /Alice — Nightfall_78/);
+
+      // Remove only offers your own list.
+      const removable = await complete(aliceGm, 'remove', 'blueprint', '');
+      assert.equal(removable.length, 2);
+      const bobRemovable = await complete(plainGm, 'remove', 'blueprint', '');
+      assert.equal(bobRemovable[0].value, '__none__');
+      await assert.rejects(run(plainGm, 'remove', { blueprint: js400.value }), /isn't on your list/);
+      await run(aliceGm, 'remove', { blueprint: js400.value });
+      const nobody = await run(plainGm, 'who', { blueprint: js400.value });
+      assert.match(nobody.calls.reply[0].content, /Nobody in the org/);
+
+      // Guards: non-members are kept out, and picks must come from the list.
+      await assert.rejects(run(guestGm, 'list'), /only for org members/);
+      await assert.rejects(run(aliceGm, 'add', { blueprint: 'made-up' }), /suggestion list/);
+      await assert.rejects(run(aliceGm, 'add', { blueprint: js400.value, category: 'nope' }), /category from the suggestion list/);
+
+      // Long lists come back as an attached file.
+      const many = await bps.searchBlueprints('ORC-mkV', null);
+      for (const b of (await require('../src/db').query(`SELECT blueprint_id FROM blueprints WHERE subcategory_id LIKE 'BS6%'`)).rows) {
+        await bps.addMemberBlueprint(ALICE, b.blueprint_id);
+      }
+      assert.ok(many.length > 0);
+      const big = await run(aliceGm, 'list');
+      assert.equal(big.calls.reply[0].files.length, 1);
+      assert.match(big.calls.reply[0].embeds[0].toJSON().description, /full list is in the attached file/);
+    });
+
+    test('/wipe-inventory, /wipe-revert, /wipe-history: typed, dated, reversible wipes', async () => {
+      const wipeInventory = require('../src/commands/wipeInventory');
+      const wipeRevert = require('../src/commands/wipeRevert');
+      const wipeHistory = require('../src/commands/wipeHistory');
+      const members = require('../src/services/members');
+      const ADMIRAL = '100000000000000005';
+      const admiralGm = fakeGuildMember(ADMIRAL, 'Admiral Kane', ['Admiral of Combat']);
+      const allMembers = { ...guildMembers, [ADMIRAL]: admiralGm };
+      const count = async (t, where = '') => (await db.query(`SELECT count(*)::int AS n FROM ${t} ${where}`)).rows[0].n;
+      const oreWhere = 'WHERE item_id IN (SELECT item_id FROM ore_mineral_quality)';
+      const sumQty = async () => Number((await db.query('SELECT COALESCE(sum(quantity), 0) AS q FROM inventory')).rows[0].q);
+
+      // Make sure there's something of every kind to wipe: ores, a ship, blueprints, tickets.
+      await inventory.addStock({
+        itemId: ids.gladius, ownerId: BOB, designation: 'org', quantity: 1, locationId: ids.lorville, actorId: OFFICER,
+      });
+      await db.query(`INSERT INTO requests (requester_member_id, request_type, item_id, quantity) VALUES
+        ($1, 'add', $2, 1), ($1, 'add', $3, 1)`, [ALICE, ids.titanium, ids.gladius]);
+      await db.query(`UPDATE transactions SET note = '=HYPERLINK("x")' WHERE id = (SELECT min(id) FROM transactions)`);
+      const start = {
+        inventory: await count('inventory'),
+        quantity: await sumQty(),
+        ores: await count('inventory', oreWhere),
+        transactions: await count('transactions'),
+        member_blueprints: await count('member_blueprints'),
+      };
+      assert.ok(start.ores > 0 && start.inventory > start.ores && start.member_blueprints > 0);
+      const handleBefore = (await members.getMember(ALICE)).rsi_handle;
+      assert.ok(handleBefore);
+
+      // --- Fake Discord: channels that remember edits, roles, DMs ------------------
+      await settings.setChannelId('logs', 'chan-logs-old');
+      const channels = {};
+      const channelEvents = [];
+      const posted = [];
+      const state = { cloneFails: false };
+      const makeChannel = (id, name) => {
+        channels[id] = {
+          id,
+          name,
+          parentId: 'cat-inventory',
+          rawPosition: 3,
+          permissionOverwrites: { cache: [{ id: 'role-officer', allow: 'read' }] },
+          clone: async ({ reason }) => {
+            if (state.cloneFails) throw new Error('Missing Permissions');
+            channelEvents.push(['clone', id, reason]);
+            return makeChannel('chan-logs-new', channels[id].name);
+          },
+          edit: async (opts) => {
+            channelEvents.push(['edit', id, opts.name, opts]);
+            channels[id].name = opts.name;
+          },
+          delete: async () => channelEvents.push(['delete', id]),
+        };
+        return channels[id];
+      };
+      makeChannel('chan-logs-old', 'logs');
+
+      const make = (gm, opts = {}) => {
+        const {
+          typeValue, wipeValue, word = 'WIPE', channelId = 'chan-admin', editFails = false, dmFails = false,
+        } = opts;
+        const i = fakeInteraction({
+          user: { id: gm.id }, member: gm, guildMembers: allMembers, channelId, options: { type: typeValue, wipe: wipeValue },
+        });
+        i.customId = wipeValue ? `wipe-revert:submit:${wipeValue}` : `wipe:submit:${typeValue}`;
+        i.isModalSubmit = () => true;
+        i.fields = { getTextInputValue: () => word };
+        i.modals = [];
+        i.showModal = async (m) => { i.modals.push(m.toJSON()); };
+        i.deferReply = async () => { i.deferred = true; };
+        i.calls.followUp = [];
+        i.followUp = async (payload) => { i.calls.followUp.push(payload); };
+        i.calls.dm = [];
+        i.user.send = async (payload) => {
+          if (dmFails) throw new Error('Cannot send messages to this user');
+          i.calls.dm.push(payload);
+        };
+        if (editFails) i.editReply = async () => { throw new Error('Request entity too large'); };
+        i.client.channels.fetch = async (id) => ({
+          isTextBased: () => true,
+          send: async (msg) => { posted.push({ id, ...msg }); },
+        });
+        i.guild.channels = {
+          fetch: async (id) => {
+            if (!channels[id]) throw new Error('Unknown Channel');
+            return channels[id];
+          },
+        };
+        i.guild.roles = {
+          fetch: async () => {},
+          everyone: { id: 'role-everyone' },
+          cache: { find: (fn) => [{ id: 'role-admiral', name: 'Admiral of Combat' }].find(fn) },
+        };
+        i.guild.client = { user: { id: 'bot' } };
+        return i;
+      };
+      const wipeAs = (gm, typeValue, opts = {}) => make(gm, { typeValue, ...opts });
+      const revertAs = (gm, wipeValue, opts = {}) => make(gm, { wipeValue, word: 'REVERT', ...opts });
+      const csvFiles = (reply) => Object.fromEntries(reply.files.map(
+        (f) => [f.name.replace(/^backup-[\d-]+_\d{4}-/, ''), f.attachment.toString('utf8')],
+      ));
+      const dataLines = (csv) => csv.trim().split('\r\n').length - 1;
+
+      // --- Guards ----------------------------------------------------------------
+      // Only the Admiral role: officers are refused, both on the command and on the pop-up.
+      await assert.rejects(wipeInventory.execute(wipeAs(officerGm, 'ores')), /Admiral of Combat/);
+      await assert.rejects(wipeInventory.handleInteraction(wipeAs(officerGm, 'ores')), /Admiral of Combat/);
+      await assert.rejects(wipeInventory.execute(wipeAs(admiralGm, 'everything')), /pick a wipe type/);
+      // A full wipe can't be run from inside #logs (it's swapped); a partial one can.
+      await assert.rejects(wipeInventory.execute(wipeAs(admiralGm, 'full', { channelId: 'chan-logs-old' })), /another channel/);
+      const opened = wipeAs(admiralGm, 'ores', { channelId: 'chan-logs-old' });
+      await wipeInventory.execute(opened);
+      assert.equal(opened.modals[0].custom_id, 'wipe:submit:ores');
+      assert.equal(opened.modals[0].title, 'Wipe: Ores & minerals');
+      // Nothing of that type in stock: refused before the pop-up.
+      await assert.rejects(wipeInventory.execute(wipeAs(admiralGm, 'armor')), /no \*\*armor & clothing\*\* in the inventory/);
+      // Wrong word, or a backup that can't be delivered: nothing is wiped.
+      await assert.rejects(wipeInventory.handleInteraction(wipeAs(admiralGm, 'full_blueprints', { word: 'yes' })), /type \*\*WIPE\*\*/);
+      await assert.rejects(wipeInventory.handleInteraction(wipeAs(admiralGm, 'full_blueprints', { editFails: true })), /nothing was wiped/);
+      assert.equal(await count('inventory'), start.inventory);
+      assert.equal(await count('transactions'), start.transactions);
+      assert.equal(await count('wipes'), 0, 'a rolled-back wipe leaves no record');
+      assert.equal(posted.length, 0);
+
+      // --- Wipe #1: ores only ----------------------------------------------------
+      const ores = wipeAs(admiralGm, 'ores', { word: ' wipe ' });
+      assert.equal(await wipeInventory.handleInteraction(ores), true);
+      const oreFiles = csvFiles(ores.calls.editReply[0]);
+      assert.deepEqual(Object.keys(oreFiles), ['ores-inventory.csv']);
+      assert.equal(dataLines(oreFiles['ores-inventory.csv']), start.ores);
+      assert.match(oreFiles['ores-inventory.csv'], /Titanium/);
+      assert.doesNotMatch(oreFiles['ores-inventory.csv'], /Gladius/);
+      assert.equal(await count('inventory', oreWhere), 0, 'ores are gone');
+      assert.equal(await count('inventory'), start.inventory - start.ores, 'everything else stays');
+      assert.equal(await count('archived_inventory', 'WHERE wipe_id = 1'), start.ores, 'ores are archived');
+      assert.equal(await count('transactions'), start.transactions + start.ores, 'history kept, one wipe entry per record');
+      const wipeRows = (await db.query(`SELECT * FROM transactions WHERE action_type = 'wipe'`)).rows;
+      assert.ok(wipeRows.every((r) => Number(r.quantity_delta) < 0 && r.actor_id === ADMIRAL && r.note === 'Game wipe #1: Ores & minerals'));
+      const tickets = (await db.query('SELECT status FROM requests ORDER BY id')).rows;
+      assert.deepEqual(tickets.map((t) => t.status), ['cancelled', 'pending'], 'only the ore ticket is cancelled');
+      assert.deepEqual(channelEvents, [], '#logs is not swapped for a partial wipe');
+      assert.equal(posted.at(-1).id, 'chan-logs-old');
+      assert.match(posted.at(-1).content, /🧹 \*\*Wipe #1 — Ores & minerals were wiped by Admiral Kane\*\* on <t:\d+:f>\.\nRemoved \d+ inventory records?; each removal is recorded in history as a wipe\. 1 pending ticket for these items was cancelled/);
+      assert.deepEqual(posted.at(-1).allowedMentions, { parse: [] });
+      assert.match(ores.calls.followUp[0].content, /Wipe #1 done — Ores & minerals\*\* \(<t:\d+:f>\)/);
+      assert.match(ores.calls.followUp[0].content, /Undo with `\/wipe-revert` \(Wipe #1\)/);
+      assert.match(ores.calls.followUp[0].content, /recorded in <#chan-logs-old>/);
+      await assert.rejects(wipeInventory.execute(wipeAs(admiralGm, 'ores')), /Nothing to wipe/);
+
+      // --- Wipe #2: full, blueprints kept -----------------------------------------
+      const beforeFull = { inventory: await count('inventory'), transactions: await count('transactions'), quantity: await sumQty() };
+      const full = wipeAs(admiralGm, 'full');
+      await wipeInventory.handleInteraction(full);
+      const backup = full.calls.editReply[0];
+      assert.match(backup.content, new RegExp(`Backup before the wipe — Full wipe \\(keep blueprints\\)\\*\\* \\(${beforeFull.inventory} inventory records?, ${beforeFull.transactions} history entries, 2 tickets\\)`));
+      const files = csvFiles(backup);
+      assert.deepEqual(Object.keys(files).sort(), ['full-history.csv', 'full-inventory.csv', 'full-tickets.csv']);
+      assert.equal(dataLines(files['full-history.csv']), beforeFull.transactions);
+      assert.match(files['full-inventory.csv'], /^\uFEFFrecord_id,category,subcategory,item/);
+      assert.match(files['full-history.csv'], /"'=HYPERLINK\(""x""\)"/, 'formula text is neutralized and quoted');
+      assert.match(files['full-history.csv'], /,wipe,Titanium,/);
+      assert.equal(full.calls.dm[0].files.length, 3);
+      for (const t of ['inventory', 'transactions', 'requests']) assert.equal(await count(t), 0, `${t} is empty`);
+      assert.equal(await count('archived_transactions', 'WHERE wipe_id = 2'), beforeFull.transactions);
+      assert.equal(await count('member_blueprints'), start.member_blueprints, 'blueprint lists kept');
+      assert.equal((await members.getMember(ALICE)).rsi_handle, handleBefore);
+      assert.equal(await count('blueprints'), 1606);
+      assert.equal(await count('items'), 291);
+      assert.equal(await settings.getChannelId('input'), 'chan-input');
+      // Stock can be added straight away.
+      await inventory.addStock({
+        itemId: ids.titanium, ownerId: ALICE, designation: 'org', quantity: 1, locationId: ids.everus, actorId: OFFICER,
+      });
+      // #logs: a copy takes over; the old channel is renamed with the date and hidden (Admiral only).
+      const today = new Date().toISOString().slice(0, 10);
+      assert.deepEqual(channelEvents.map((e) => e.slice(0, 3)), [
+        ['clone', 'chan-logs-old', 'Wipe #2 by Admiral Kane'],
+        ['edit', 'chan-logs-old', `logs-archive-${today}`],
+      ]);
+      const hidden = channelEvents[1][3].permissionOverwrites;
+      assert.deepEqual(hidden.map((o) => o.id), ['role-everyone', 'bot', 'role-admiral']);
+      assert.equal(await settings.getChannelId('logs'), 'chan-logs-new');
+      assert.equal((await db.query('SELECT logs_archive_channel_id FROM wipes WHERE wipe_id = 2')).rows[0].logs_archive_channel_id, 'chan-logs-old');
+      assert.equal(posted.at(-1).id, 'chan-logs-new');
+      assert.match(posted.at(-1).content, /Wipe #2 — the inventory system was wiped by Admiral Kane\*\* \(full wipe \(keep blueprints\)\) on <t:\d+:f>\. This is a fresh log; the earlier one was archived/);
+      assert.match(posted.at(-1).content, /members' blueprint lists, the item catalog and the blueprint pool were kept/);
+      assert.match(full.calls.followUp[0].content, /#logs starts fresh in <#chan-logs-new>.*kept as <#chan-logs-old>, visible only to the Admiral of Combat role/);
+
+      // --- Wipe #3: blueprints only -----------------------------------------------
+      channelEvents.length = 0;
+      const bps = wipeAs(admiralGm, 'blueprints');
+      await wipeInventory.handleInteraction(bps);
+      const bpFiles = csvFiles(bps.calls.editReply[0]);
+      assert.deepEqual(Object.keys(bpFiles), ['blueprints-blueprints.csv']);
+      assert.equal(dataLines(bpFiles['blueprints-blueprints.csv']), start.member_blueprints);
+      assert.match(bpFiles['blueprints-blueprints.csv'], /Alice,Nightfall_78/);
+      assert.equal(await count('member_blueprints'), 0);
+      assert.equal(await count('inventory'), 1, 'inventory untouched');
+      assert.deepEqual(channelEvents, []);
+      assert.match(posted.at(-1).content, /Wipe #3 — all member blueprint lists were wiped by Admiral Kane\*\*[^]*Removed \d+ blueprint entries/);
+      await assert.rejects(wipeInventory.execute(wipeAs(admiralGm, 'blueprints')), /no member has any blueprints/);
+
+      // --- Wipe #4: full + blueprints, when Discord won't let the bot swap #logs ----
+      await require('../src/services/blueprints').addMemberBlueprint(ALICE, 'BP0001');
+      state.cloneFails = true;
+      const again = wipeAs(admiralGm, 'full_blueprints', { dmFails: true });
+      await wipeInventory.handleInteraction(again);
+      state.cloneFails = false;
+      assert.ok(csvFiles(again.calls.editReply[0])['full_blueprints-blueprints.csv'].includes('BP0001'));
+      assert.equal(await count('member_blueprints'), 0);
+      assert.equal(await count('inventory'), 0);
+      assert.equal(await settings.getChannelId('logs'), 'chan-logs-new');
+      assert.equal(posted.at(-1).id, 'chan-logs-new');
+      assert.match(posted.at(-1).content, /Wipe #4 — the inventory system was wiped by Admiral Kane\*\* \(full wipe \+ blueprints\)[^]*Messages above this line are from before the wipe/);
+      assert.match(again.calls.followUp[0].content, /couldn't clear the #logs history/);
+      assert.match(again.calls.followUp[0].content, /couldn't DM you/);
+
+      // --- /wipe-history: dated list for officers and the Admiral -----------------
+      await assert.rejects(wipeHistory.execute(make(plainGm, {})), /Only officers/);
+      const hist = make(officerGm, {});
+      await wipeHistory.execute(hist);
+      const histText = hist.calls.reply[0].embeds[0].toJSON().description;
+      assert.match(histText, /^\*\*#4\*\* · <t:\d+:f> · \*\*Full wipe \+ blueprints\*\* · by Admiral Kane/);
+      assert.match(histText, /\*\*#1\*\* · <t:\d+:f> · \*\*Ores & minerals\*\* · by Admiral Kane\n {2}Removed: \d+ inventory records?, 1 cancelled ticket\n {2}Not reverted/);
+
+      // --- /wipe-revert guards ------------------------------------------------------
+      const complete = async (gm, text = '') => {
+        const i = make(gm, {});
+        i.options.getFocused = () => text;
+        let out;
+        i.respond = async (choices) => { out = choices; };
+        await wipeRevert.autocomplete(i);
+        return out;
+      };
+      assert.match((await complete(officerGm))[0].name, /Only the Admiral of Combat role/);
+      const picks = await complete(admiralGm);
+      assert.deepEqual(picks.map((p) => p.value), ['4', '3', '2', '1'], 'newest first');
+      assert.match(picks[3].name, /^#1 · \d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC · Ores & minerals · Admiral Kane · \d+ records?$/);
+      assert.deepEqual((await complete(admiralGm, 'blueprints only')).map((p) => p.value), ['3']);
+      await assert.rejects(wipeRevert.execute(revertAs(officerGm, '1')), /Admiral of Combat/);
+      await assert.rejects(wipeRevert.execute(revertAs(admiralGm, '99')), /pick a wipe/);
+      await assert.rejects(wipeRevert.execute(revertAs(admiralGm, '2', { channelId: 'chan-logs-new' })), /another channel/);
+      const revertModal = revertAs(admiralGm, '1');
+      await wipeRevert.execute(revertModal);
+      assert.equal(revertModal.modals[0].custom_id, 'wipe-revert:submit:1');
+      assert.match(revertModal.modals[0].components[0].description, /^Ores & minerals from \d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC/);
+      await assert.rejects(wipeRevert.handleInteraction(revertAs(admiralGm, '1', { word: 'WIPE' })), /type \*\*REVERT\*\*/);
+      await assert.rejects(wipeRevert.handleInteraction(revertAs(officerGm, '1')), /Admiral of Combat/);
+
+      // --- Revert #2 (full): everything from before it comes back, #logs swaps back --
+      const r2 = revertAs(admiralGm, '2');
+      assert.equal(await wipeRevert.handleInteraction(r2), true);
+      assert.equal(await count('inventory'), beforeFull.inventory);
+      assert.equal(await sumQty(), beforeFull.quantity);
+      assert.equal(await count('transactions'), beforeFull.transactions);
+      assert.equal(await count('requests'), 2);
+      assert.equal(await settings.getChannelId('logs'), 'chan-logs-old');
+      assert.equal(channels['chan-logs-old'].name, 'logs', 'archived channel takes the live name back');
+      assert.equal(channels['chan-logs-new'].name, `logs-after-wipe-${today}`);
+      const swap = channelEvents.filter((e) => e[0] === 'edit').map((e) => e[3]);
+      assert.equal(swap[0].parent, 'cat-inventory');
+      assert.deepEqual(swap[0].permissionOverwrites, [{ id: 'role-officer', allow: 'read' }], 'copies the live channel\'s permissions');
+      assert.deepEqual(swap[1].permissionOverwrites.map((o) => o.id), ['role-everyone', 'bot', 'role-admiral']);
+      assert.equal(posted.at(-1).id, 'chan-logs-old');
+      assert.match(posted.at(-1).content, /↩️ \*\*Wipe #2 \(Full wipe \(keep blueprints\), from <t:\d+:f>\) was reverted by Admiral Kane\*\* on <t:\d+:f>\.\nRestored: \d+ inventory records, \d+ history entries, 2 tickets\. Anything added since the wipe was kept\.\nThe log from before the wipe is back in this channel\. Lines written between the wipe and now are kept in <#chan-logs-new>/);
+      assert.match(r2.calls.editReply[0].content, /Wipe #2 reverted[^]*old #logs is back as <#chan-logs-old>/);
+      await assert.rejects(wipeRevert.execute(revertAs(admiralGm, '2')), /already reverted by \*\*Admiral Kane\*\* on <t:\d+:f>/);
+      await assert.rejects(wipeRevert.handleInteraction(revertAs(admiralGm, '2')), /already reverted/);
+
+      // --- Revert #1 (ores): ores return, recorded in history, ticket reopened -------
+      const txBefore = await count('transactions');
+      await wipeRevert.handleInteraction(revertAs(admiralGm, '1'));
+      assert.equal(await count('inventory', oreWhere), start.ores);
+      assert.equal(await count('inventory'), start.inventory);
+      assert.equal(await sumQty(), start.quantity);
+      assert.equal(await count('transactions', `WHERE action_type = 'wipe_revert'`), start.ores);
+      assert.equal(await count('transactions'), txBefore + start.ores);
+      assert.deepEqual((await db.query('SELECT status FROM requests ORDER BY id')).rows.map((t) => t.status), ['pending', 'pending']);
+      assert.match(posted.at(-1).content, /Wipe #1 \(Ores & minerals[^]*Restored: \d+ inventory records?, 1 reopened ticket\./);
+
+      // --- Revert #4 and #3: stock added later merges; blueprint lists come back -----
+      await wipeRevert.handleInteraction(revertAs(admiralGm, '4'));
+      assert.equal(await sumQty(), start.quantity + 1, 'the Titanium added after wipe #2 merges back in');
+      assert.equal(await count('member_blueprints'), 1);
+      await wipeRevert.handleInteraction(revertAs(admiralGm, '3'));
+      assert.equal(await count('member_blueprints'), start.member_blueprints + 1);
+      assert.deepEqual((await complete(admiralGm)).map((p) => p.value), ['__none__'], 'nothing left to revert');
+
+      const hist2 = make(admiralGm, {});
+      await wipeHistory.execute(hist2);
+      assert.equal((hist2.calls.reply[0].embeds[0].toJSON().description.match(/↩️ Reverted by Admiral Kane on <t:\d+:f>/g) || []).length, 4);
+    });
+
+    test('officer-sc and officer both count as officers', async () => {
+      const members = require('../src/services/members');
+      const { requireOfficer } = require('../src/lib/discord');
+      assert.equal(members.isOfficer(fakeGuildMember('1', 'A', ['officer'])), true);
+      assert.equal(members.isOfficer(fakeGuildMember('2', 'B', ['officer-sc'])), true);
+      assert.equal(members.isOfficer(fakeGuildMember('3', 'C', ['Star Citizen'])), false);
+      assert.throws(() => requireOfficer({ member: fakeGuildMember('3', 'C', []) }), /\*\*officer-sc\*\* or \*\*officer\*\*/);
+      const addItem = require('../src/commands/addItem');
+      const i = fakeInteraction({
+        user: { id: '9' }, member: fakeGuildMember('9', 'New Officer', ['officer']), guildMembers, channelId: 'chan-other',
+      });
+      await assert.rejects(addItem.execute(i), /run this command in <#chan-input>/, 'passes the officer check');
+    });
+
+    test('csv writer quotes and neutralizes cells', () => {
+      const { toCsv } = require('../src/lib/csv');
+      const out = toCsv([{ a: 'x,y', b: -5, c: '-rm', d: null, e: 'say "hi"', f: '+1' }], ['a', 'b', 'c', 'd', 'e', 'f']);
+      assert.equal(out, '\uFEFFa,b,c,d,e,f\r\n"x,y",-5,\'-rm,,"say ""hi""",\'+1\r\n');
     });
   });
 });

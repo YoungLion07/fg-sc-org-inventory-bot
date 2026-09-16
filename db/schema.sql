@@ -71,6 +71,36 @@ CREATE TABLE IF NOT EXISTS locations (
   notes                    TEXT
 );
 
+-- Crafting blueprints (patch 4.10 pool). Blueprints are permanent per character and
+-- can't be traded, so they're tracked as a "who knows what" registry, not as inventory.
+CREATE TABLE IF NOT EXISTS blueprint_categories (
+  category_id  TEXT PRIMARY KEY,
+  name         TEXT NOT NULL,
+  description  TEXT
+);
+
+CREATE TABLE IF NOT EXISTS blueprint_subcategories (
+  subcategory_id      TEXT PRIMARY KEY,
+  parent_category_id  TEXT NOT NULL REFERENCES blueprint_categories (category_id),
+  name                TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS blueprints (
+  blueprint_id      TEXT PRIMARY KEY,
+  subcategory_id    TEXT NOT NULL REFERENCES blueprint_subcategories (subcategory_id),
+  name              TEXT NOT NULL,
+  game_key          TEXT NOT NULL UNIQUE,
+  game_type         TEXT,
+  grade             TEXT,
+  size              TEXT,
+  craft_minutes     INTEGER,
+  default_unlocked  BOOLEAN NOT NULL DEFAULT false,
+  materials         TEXT,
+  notes             TEXT
+);
+
+CREATE INDEX IF NOT EXISTS blueprints_subcategory_idx ON blueprints (subcategory_id);
+
 -- ---------------------------------------------------------------------------
 -- Roster
 -- ---------------------------------------------------------------------------
@@ -84,6 +114,16 @@ CREATE TABLE IF NOT EXISTS members (
   active            BOOLEAN NOT NULL DEFAULT true,
   updated_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Which member has unlocked which blueprint (self-service registry).
+CREATE TABLE IF NOT EXISTS member_blueprints (
+  member_id     BIGINT NOT NULL REFERENCES members (member_id),
+  blueprint_id  TEXT NOT NULL REFERENCES blueprints (blueprint_id),
+  added_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (member_id, blueprint_id)
+);
+
+CREATE INDEX IF NOT EXISTS member_blueprints_blueprint_idx ON member_blueprints (blueprint_id);
 
 -- ---------------------------------------------------------------------------
 -- Inventory & audit
@@ -115,7 +155,7 @@ CREATE TABLE IF NOT EXISTS transactions (
   id                 BIGSERIAL PRIMARY KEY,
   "timestamp"        TIMESTAMPTZ NOT NULL DEFAULT now(),
   actor_id           BIGINT NOT NULL REFERENCES members (member_id),
-  action_type        TEXT NOT NULL CHECK (action_type IN ('add', 'remove', 'transfer_out', 'transfer_in', 'adjust')),
+  action_type        TEXT NOT NULL CHECK (action_type IN ('add', 'remove', 'transfer_out', 'transfer_in', 'adjust', 'wipe', 'wipe_revert')),
   item_id            TEXT NOT NULL REFERENCES items (item_id),
   owner_member_id    BIGINT NOT NULL REFERENCES members (member_id),
   designation        TEXT NOT NULL,
@@ -127,6 +167,13 @@ CREATE TABLE IF NOT EXISTS transactions (
   request_id         BIGINT,          -- set when the change came from an approved ticket (Phase 5)
   note               TEXT
 );
+
+-- 'wipe' rows record stock cleared by a partial /wipe-inventory (e.g. only ores);
+-- 'wipe_revert' rows record that stock coming back through /wipe-revert.
+-- Re-applied on every start so databases created before 'wipe' existed pick it up.
+ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_action_type_check;
+ALTER TABLE transactions ADD CONSTRAINT transactions_action_type_check
+  CHECK (action_type IN ('add', 'remove', 'transfer_out', 'transfer_in', 'adjust', 'wipe', 'wipe_revert'));
 
 CREATE INDEX IF NOT EXISTS transactions_item_idx     ON transactions (item_id);
 CREATE INDEX IF NOT EXISTS transactions_owner_idx    ON transactions (owner_member_id);
@@ -165,6 +212,45 @@ CREATE TABLE IF NOT EXISTS requests (
 );
 
 CREATE INDEX IF NOT EXISTS requests_pending_idx ON requests (requester_member_id) WHERE status = 'pending';
+
+-- ---------------------------------------------------------------------------
+-- Game-wipe resets (/wipe-inventory) and their archives (/wipe-revert)
+-- A wipe moves rows into the archived_* tables instead of deleting them, so it can be undone.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS wipes (
+  wipe_id                  BIGSERIAL PRIMARY KEY,
+  wipe_type                TEXT NOT NULL,                 -- ores, components, ..., full, full_blueprints, blueprints
+  wiped_by                 BIGINT NOT NULL REFERENCES members (member_id),
+  wiped_at                 TIMESTAMPTZ NOT NULL DEFAULT now(),
+  counts                   JSONB NOT NULL DEFAULT '{}',   -- what was removed, e.g. {"inventory": 12}
+  logs_archive_channel_id  TEXT,                          -- full wipes: the old #logs, renamed and hidden
+  reverted_by              BIGINT REFERENCES members (member_id),
+  reverted_at              TIMESTAMPTZ,
+  revert_logs_channel_id   TEXT                           -- full-wipe reverts: the #logs used between wipe and revert
+);
+
+CREATE TABLE IF NOT EXISTS archived_inventory (
+  wipe_id  BIGINT NOT NULL REFERENCES wipes (wipe_id),
+  LIKE inventory
+);
+CREATE TABLE IF NOT EXISTS archived_transactions (
+  wipe_id  BIGINT NOT NULL REFERENCES wipes (wipe_id),
+  LIKE transactions
+);
+CREATE TABLE IF NOT EXISTS archived_requests (
+  wipe_id  BIGINT NOT NULL REFERENCES wipes (wipe_id),
+  LIKE requests
+);
+CREATE TABLE IF NOT EXISTS archived_member_blueprints (
+  wipe_id  BIGINT NOT NULL REFERENCES wipes (wipe_id),
+  LIKE member_blueprints
+);
+
+CREATE INDEX IF NOT EXISTS archived_inventory_wipe_idx         ON archived_inventory (wipe_id);
+CREATE INDEX IF NOT EXISTS archived_transactions_wipe_idx      ON archived_transactions (wipe_id);
+CREATE INDEX IF NOT EXISTS archived_requests_wipe_idx          ON archived_requests (wipe_id);
+CREATE INDEX IF NOT EXISTS archived_member_blueprints_wipe_idx ON archived_member_blueprints (wipe_id);
 
 -- ---------------------------------------------------------------------------
 -- Bot settings (channel IDs saved by /setup-server)

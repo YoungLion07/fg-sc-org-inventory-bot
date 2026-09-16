@@ -28,6 +28,14 @@ const TABLES = [
     key: 'location_id',
     cols: ['location_id', 'parent_location_type_id', 'parent_planet_id', 'name', 'planet_or_body', 'notes'],
   },
+  { name: 'blueprint_categories', key: 'category_id', cols: ['category_id', 'name', 'description'] },
+  { name: 'blueprint_subcategories', key: 'subcategory_id', cols: ['subcategory_id', 'parent_category_id', 'name'] },
+  {
+    name: 'blueprints',
+    key: 'blueprint_id',
+    cols: ['blueprint_id', 'subcategory_id', 'name', 'game_key', 'game_type', 'grade', 'size',
+      'craft_minutes', 'default_unlocked', 'materials', 'notes'],
+  },
 ];
 
 async function seed(dataPath = path.join(__dirname, '..', 'db', 'seed-data.json')) {

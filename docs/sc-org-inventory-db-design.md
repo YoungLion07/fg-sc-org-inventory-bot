@@ -1,6 +1,6 @@
 # Star Citizen Org Inventory & Member Management — Database & Bot Design
 
-*Living document — covers the data model, all three officer wizards (`/add-item`, `/remove-item`, `/transfer-item`), the member-submitted ticket system, the live inventory board, and the five-channel layout. Still open: member roster bootstrapping, the workbook-to-database import step, full specs for `/item add`/`/audit-log`/`/report export`, and basic bot infrastructure (hosting, secrets, confirming `officer-sc` exists).*
+*Living document — covers the data model, all three officer wizards (`/add-item`, `/remove-item`, `/transfer-item`), the member-submitted ticket system, the live inventory board, gamertag registration, and the six-channel layout. Phase 1 (officer commands, roster sync, logs, gamertag registration) is built; the board, tickets, `/audit-log`, `/report export`, and `/item add` are next.*
 
 ## Overview
 
@@ -27,6 +27,19 @@ These mirror the two spreadsheets already built and are meant to be imported dir
 
 `locations` is doubly parented — by location type and by planet — since many stations are specifically that planet's orbital satellite (very common at Stanton, common at Pyro too), while others genuinely orbit nothing in particular (deep-space waypoints, asteroid-belt bases). `PLNONE` covers that second case explicitly rather than leaving the field blank, so "no nearby planet" is a real, selectable answer instead of a missing one.
 
+### Blueprint pool & registry
+
+Crafting blueprints are permanent and tied to the character that unlocked them — they can't be traded, handed over, or pooled — so they aren't inventory (no quantity, no location, nothing to transfer). Instead the bot keeps a **registry of which member knows which blueprint**, so officers can find who can craft a needed component and route materials to them.
+
+| Table | Key columns | Notes |
+|---|---|---|
+| `blueprint_categories` | `category_id` PK, `name` | 8 parents: Ship Weapons, Ship Components, Mining/Salvage/Utility, Personal Weapons, Magazines & Batteries, Armor, Clothing, Miscellaneous |
+| `blueprint_subcategories` | `subcategory_id` PK, `parent_category_id` FK | 35, e.g. Power Plants, Pistols, Medium Helmets (armor is split by weight class and piece) |
+| `blueprints` | `blueprint_id` PK, `subcategory_id` FK, `name`, `game_key` (unique), `size`, `grade`, `craft_minutes`, `default_unlocked`, `materials` | Every blueprint in patch 4.10.0-LIVE — 1,606 including every color/camo variant — from the Star Citizen Wiki API |
+| `member_blueprints` | (`member_id`, `blueprint_id`) PK, `added_at` | The registry itself |
+
+Members manage their own entries with `/blueprint add` and `/blueprint remove` — no approval step, since there's nothing to gain from faking one and it keeps officers' workload down. Any org member can view a list (`/blueprint list [member]`) or look up who can craft something (`/blueprint who`); guests without an org role can't. Blueprint changes aren't posted to `#logs`, which stays focused on inventory.
+
 ### `members`
 Tracks the org roster.
 
@@ -39,7 +52,7 @@ Tracks the org roster.
 | `joined_at` | timestamp | |
 | `active` | boolean | False when a member leaves, rather than deleting the row |
 
-**Roster bootstrapping.** A Discord user counts as an org member if they hold at least one of the `Star Citizen` or `Organization-SC` roles — one is enough to qualify, and having both is fine too; there's no scenario where holding both roles disqualifies someone. This is kept in sync automatically rather than by hand: the bot listens for Discord's member-update event, and whenever someone gains one of those two roles for the first time, it inserts (or reactivates) their `members` row; whenever someone loses both of them, or leaves the server entirely, their row is set `active = false` — never deleted, so their history in `inventory`/`transactions` stays intact. For the very first rollout, a one-time startup sync scans everyone currently in the server, checks the same two roles, and bulk-inserts the initial 100+ roster in one pass rather than waiting for each person's roles to change again. Note that `rsi_handle` can't be inferred from Discord roles at all — that still needs a lightweight self-service step (e.g. a `/set-handle` command each member runs once) or an officer filling it in.
+**Roster bootstrapping.** A Discord user counts as an org member if they hold at least one of the `Star Citizen` or `Organization-SC` roles — one is enough to qualify, and having both is fine too; there's no scenario where holding both roles disqualifies someone. This is kept in sync automatically rather than by hand: the bot listens for Discord's member-update event, and whenever someone gains one of those two roles for the first time, it inserts (or reactivates) their `members` row; whenever someone loses both of them, or leaves the server entirely, their row is set `active = false` — never deleted, so their history in `inventory`/`transactions` stays intact. For the very first rollout, a one-time startup sync scans everyone currently in the server, checks the same two roles, and bulk-inserts the initial 100+ roster in one pass rather than waiting for each person's roles to change again. `rsi_handle` can't be inferred from Discord roles, so it's filled in two ways: officers use the pinned **Register member** button in `#register-member` (pick any member holding `Star Citizen` and/or `Organization-SC`, type their gamertag), and members can set their own with `/set-handle`. A gamertag can belong to only one member (case-insensitive), re-registering replaces the old value, and every change posts an old → new line to `#logs`.
 
 ### `inventory`
 A single table for every held item, whether it's designated personal or org property. Earlier drafts split this into `org_inventory` and `member_inventory`, but since every item always has an owning/custodian member (confirmed: org items are still held by whichever officer/member has them), one table with a `designation` flag is simpler, avoids duplicated schema, and matches the single `/add-item` wizard that captures the same fields either way.
@@ -77,7 +90,7 @@ An append-only audit log. Every add, remove, or transfer writes a row here in th
 | `id` | serial, PK | |
 | `timestamp` | timestamp | |
 | `actor_id` | FK → members | The officer who performed the action (= `logged_by`) |
-| `action_type` | text | add / remove / transfer_out / transfer_in / adjust |
+| `action_type` | text | add / remove / transfer_out / transfer_in / adjust / wipe (stock cleared by a partial game-wipe reset) / wipe_revert (that stock put back by `/wipe-revert`) |
 | `item_id` | FK → items | |
 | `owner_member_id` | FK → members | Whose inventory this affected |
 | `designation` | text | personal / org, at the time of the change |
@@ -90,7 +103,9 @@ Storing `item_id`/`owner_member_id`/`designation`/`location_id` directly on `tra
 
 ## Permission model
 
-A single Discord role, `officer-sc`, gates every write command. Read/view commands are open to everyone. Members can also *request* a change via `#inventory-tickets` (see below), but that's an initiation path, not a write path — nothing touches `inventory` or `transactions` until an officer approves it.
+The officer roles gate every write command: `officer-sc` and `officer` (holding either one is enough; configured with `OFFICER_ROLE_NAMES`). Wherever this document says `officer-sc`, read it as "either officer role" — e.g. ticket pings go to both roles. Read/view commands are open to everyone. Members can also *request* a change via `#inventory-tickets` (see below), but that's an initiation path, not a write path — nothing touches `inventory` or `transactions` until an officer approves it.
+
+One command sits above the officers: `/wipe-inventory` is limited to the `Admiral of Combat` role (configurable with `ADMIRAL_ROLE_NAME`). Holding `officer-sc` alone doesn't grant it.
 
 ## The `/add-item` wizard
 
@@ -219,7 +234,7 @@ Setting this up is a one-time `/inventory-board setup` command (officer-only) ru
 
 ## Channel structure
 
-Five dedicated channels, each with a single job:
+Six dedicated channels, each with a single job:
 
 | Channel | Purpose | Who posts | Commands restricted here |
 |---|---|---|---|
@@ -228,6 +243,7 @@ Five dedicated channels, each with a single job:
 | `#logs` | Raw audit trail — one auto-posted line per transaction, as it happens, plus every ticket's outcome from `#inventory-tickets` (approved, edited-and-approved, or rejected) | Bot only, nobody types here | None — it's a read-only feed, not a command channel |
 | `#org-inventory-data` | The live, auto-updating org inventory board from the section above | Bot only | None directly — interaction happens through the board's own select menus/buttons |
 | `#inventory-tickets` | Any member requests an add/remove/transfer for officer review | Everyone | `/request-add`, `/request-remove`, `/request-transfer` only |
+| `#register-member` | Officers link a Discord member to their in-game gamertag (RSI handle) | Bot only — officers use the pinned **Register member** button | None — a button opens a form with a member picker and a gamertag field |
 
 `/add-item` working only in `#input` and `/remove-item`/`/transfer-item` only in `#output` is enforced in the bot's code itself: each command checks `interaction.channel.id` against the configured channel before doing anything else, and replies with a clear ephemeral error ("Run this in #input") if it's used elsewhere. This is more reliable than relying solely on Discord's built-in per-channel command permissions (which live in the server's Integrations settings and can be changed by any admin without the bot knowing) — the code-level check is the actual source of truth, and Discord's native restriction can be layered on top purely as a UX nicety so the command doesn't even show up as an option in the wrong channel.
 
@@ -251,6 +267,67 @@ Both officer-only, both read from `transactions` (joined with `items`/`members`/
 
 **`/setup-server`** (officer-only, run once) creates the five channels from the Channel Structure section if they don't already exist yet, and sets their permissions correctly from the start: `#input` and `#output` visible and postable only by `officer-sc` (and the bot); `#logs` and `#org-inventory-data` visible to everyone but postable only by the bot; `#inventory-tickets` open to everyone. This requires the bot to be granted the "Manage Channels" permission when it's added to the server — worth checking that's included when the bot gets invited. The `officer-sc`, `Star Citizen`, and `Organization-SC` roles are assumed to already exist (confirmed) and are referenced by name/ID rather than created by this command — it only manages channels, not roles.
 
+## Game-wipe reset (`/wipe-inventory`, `/wipe-revert`, `/wipe-history`)
+
+Star Citizen periodically wipes player inventories, which makes the org's records obsolete. `/wipe-inventory type:<…>` (Admiral of Combat only) resets part or all of the system. Every wipe is numbered, dated, and reversible.
+
+| Kind | Types | Removes | History / `#logs` |
+|---|---|---|---|
+| Item group | Ores & minerals (items with an `ore_mineral_quality` row), Ship components (C2), Other commodities (C5 minus ores), Ships & vehicles (C1), FPS weapons (C3), Armor & clothing (C4), Tools, gadgets & consumables (C6) | matching `inventory` rows; pending `requests` for those items are set to `cancelled` | kept. One `transactions` row per removed record (`action_type = 'wipe'`, negative `quantity_delta`, note "Game wipe #N: <type>"). `#logs` gets a notice. |
+| Full | Full wipe (keep blueprints), Full wipe + blueprints | everything in `inventory`, `transactions`, `requests` [, `member_blueprints`] | history cleared; `#logs` starts fresh (see below) |
+| Blueprints | Blueprints only | all `member_blueprints` rows | untouched; `#logs` gets a notice |
+
+**Storage.**
+
+- Each wipe is a row in `wipes`, which records:
+  - wipe number, type, and who ran it;
+  - `wiped_at`;
+  - the counts removed;
+  - for full wipes, the archived `#logs` channel;
+  - `reverted_by` / `reverted_at`, and the `#logs` channel used between the wipe and the revert.
+- Removed rows aren't deleted. In the same transaction they are copied into `archived_inventory`, `archived_transactions`, `archived_requests`, and `archived_member_blueprints`, tagged with `wipe_id`, and only then removed from the live tables.
+  - The archive tables are created with `LIKE <table>`, and copies use explicit column lists, so they keep working if a live table gains columns.
+  - For item-group wipes, `archived_requests` holds the pre-cancellation state of the tickets that were cancelled.
+- Full wipes no longer restart ID counters, so archived rows can always go back without clashing.
+
+**Wipe flow.**
+
+1. **Confirm.** The Admiral picks the type, and a pop-up asks them to type `WIPE`.
+   - If nothing matches, the wipe is refused, both before the pop-up and again inside the transaction.
+   - A full wipe can't be started from inside `#logs`.
+2. **Back up, then wipe, in one transaction.**
+   - The affected tables are locked against writes.
+   - CSVs of exactly what will be removed are sent to the Admiral, as an ephemeral reply plus a DM copy when possible. They're gzipped if the total is over about 8 MB.
+   - Only then are the `wipes` row and the archive written and the live rows removed. If the backup can't be delivered, everything rolls back.
+3. **`#logs` for full wipes.** Discord only lets bots bulk-delete messages under 14 days old, so the bot swaps channels instead:
+   - It clones `#logs` (same name, topic, category, position, and permission overwrites) and points `channel.logs` at the clone.
+   - It renames the old channel to `logs-archive-<YYYY-MM-DD>` and hides it: @everyone is denied View, the bot keeps its access, and the Admiral role can read.
+   - If that fails, the old channel stays live.
+4. **Announce.** Every wipe posts "Wipe #N — … wiped by *name* on *date*" with mentions disabled. Dates use Discord timestamps, so each reader sees their own time zone.
+
+**Revert flow (`/wipe-revert`, Admiral only).**
+
+1. **Pick and confirm.** Autocomplete lists wipes that haven't been reverted, newest first, as `#N · YYYY-MM-DD HH:MM UTC · type · admiral · size`. A pop-up asks for `REVERT`.
+2. **Restore, in one transaction.** The `wipes` row is locked `FOR UPDATE`, so a wipe can't be reverted twice, and the live tables are locked against writes.
+   - **Inventory:** archived rows are re-inserted with new IDs. `ON CONFLICT` on the merge key adds the quantities to anything re-logged since the wipe.
+   - **Item-group wipes:** the restore adds `wipe_revert` history rows, and tickets that are still `cancelled` get their previous state back.
+   - **Full wipes:** history is re-inserted (new IDs, original timestamps), and tickets are re-inserted with their original IDs.
+   - **Blueprint lists:** re-inserted with `ON CONFLICT DO NOTHING`.
+   - Finally, `reverted_by` and `reverted_at` are set.
+3. **Swap `#logs` back (full wipes).**
+   - The archived channel takes the live channel's name, category, position, and permission overwrites, and becomes `channel.logs`.
+   - The channel used since the wipe is renamed `logs-after-wipe-<date>` and hidden the same way.
+   - If the archive channel was deleted by hand, the current `#logs` stays.
+4. **Announce.** The revert posts "Wipe #N (type, from *date*) was reverted by *name* on *date*" with what was restored.
+
+The revert order doesn't matter. Wipes can be reverted in any order, and restores always merge with current data.
+
+**`/wipe-history`** (officers and the Admiral) lists the latest 25 wipes with number, date, type, who ran it, counts, and revert status.
+
+**Always kept:** `members` (including gamertags), all catalog and location tables, the blueprint pool, and `bot_settings`.
+
+**Schema note:** `schema.sql` drops and re-adds the `transactions.action_type` CHECK constraint on every start, so older databases pick up `'wipe'` and `'wipe_revert'`.
+
 ## Suggested bot command set
 
 | Command | Access | Purpose |
@@ -265,6 +342,9 @@ Both officer-only, both read from `transactions` (joined with `items`/`members`/
 | `/item add <name> <category> <unit>` | officer-sc | Add a new item to the catalog |
 | `/audit-log [item\|member\|date\|location]` | officer-sc | Paginated, filtered lookback through the transaction history |
 | `/report export` | officer-sc | Printed summary + attached CSV of the full matching data |
+| `/wipe-inventory type` | Admiral of Combat | Game-wipe reset by type (one item group, blueprints only, full, or full + blueprints): backup CSVs first, then a numbered, dated, archived wipe; full wipes archive `#logs` |
+| `/wipe-revert wipe` | Admiral of Combat | Undo a wipe picked from a dated list; restored data merges with anything added since |
+| `/wipe-history` | officer-sc, Admiral of Combat | Latest 25 wipes with dates, types, who ran them, and revert status |
 
 ## Technology stack recommendation
 

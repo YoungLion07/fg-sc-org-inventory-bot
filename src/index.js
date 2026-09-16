@@ -4,6 +4,9 @@ const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { config, requireConfig } = require('./config');
 const { closePool } = require('./db');
 const commands = require('./commands');
+const registerMember = require('./commands/registerMember');
+const wipeInventory = require('./commands/wipeInventory');
+const wipeRevert = require('./commands/wipeRevert');
 const members = require('./services/members');
 const { peekPending, takePending } = require('./lib/pending');
 const { UserError } = require('./lib/errors');
@@ -101,6 +104,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
       await command.execute(interaction);
       return;
     }
+    if (await registerMember.handleInteraction(interaction)) return;
+    if (await wipeInventory.handleInteraction(interaction)) return;
+    if (await wipeRevert.handleInteraction(interaction)) return;
     if (interaction.isButton()) {
       await handleButton(interaction);
     }

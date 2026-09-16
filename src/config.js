@@ -2,6 +2,10 @@
 
 require('dotenv').config({ quiet: true });
 
+function unique(values) {
+  return [...new Set(values)];
+}
+
 function list(value, fallback) {
   const raw = value && value.trim() ? value : fallback;
   return raw.split(',').map((s) => s.trim()).filter(Boolean);
@@ -13,8 +17,15 @@ const config = {
   guildId: process.env.DISCORD_GUILD_ID,
   databaseUrl: process.env.DATABASE_URL,
   databaseSsl: String(process.env.DATABASE_SSL || '').toLowerCase() === 'true',
-  officerRoleName: (process.env.OFFICER_ROLE_NAME || 'officer-sc').trim(),
+  // Every role listed here counts as an officer. OFFICER_ROLE_NAME (the older, single-role
+  // setting) is still honoured and added to the list, so existing Railway variables keep working.
+  officerRoleNames: unique([
+    ...list(process.env.OFFICER_ROLE_NAMES, 'officer-sc,officer'),
+    ...list(process.env.OFFICER_ROLE_NAME, ''),
+  ]),
   memberRoleNames: list(process.env.MEMBER_ROLE_NAMES, 'Star Citizen,Organization-SC'),
+  // The only role allowed to run /wipe-inventory (full reset after a game wipe).
+  admiralRoleName: (process.env.ADMIRAL_ROLE_NAME || 'Admiral of Combat').trim(),
 
   // Names used by /setup-server. Stored channel IDs (not names) are what the bot actually checks.
   channelCategoryName: 'Org Inventory',
@@ -24,6 +35,7 @@ const config = {
     logs: 'logs',
     board: 'org-inventory-data',
     tickets: 'inventory-tickets',
+    register: 'register-member',
   },
 
   // How long an unconfirmed Confirm/Cancel prompt stays valid.
