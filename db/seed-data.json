@@ -1,0 +1,4859 @@
+{
+ "categories": [
+  {
+   "category_id": "C1",
+   "name": "Ships & Vehicles",
+   "description": "Spaceships and ground vehicles, organized by role"
+  },
+  {
+   "category_id": "C2",
+   "name": "Ship Components",
+   "description": "Installable parts for ships/vehicles: power, propulsion, weapons, defense"
+  },
+  {
+   "category_id": "C3",
+   "name": "Personal Weapons (FPS)",
+   "description": "Handheld weapons used on foot"
+  },
+  {
+   "category_id": "C4",
+   "name": "Personal Armor & Wearables",
+   "description": "Armor, undersuits, helmets, backpacks, clothing"
+  },
+  {
+   "category_id": "C5",
+   "name": "Commodities",
+   "description": "Tradeable raw materials, refined goods, and consumable trade goods"
+  },
+  {
+   "category_id": "C6",
+   "name": "Tools, Gadgets & Consumables",
+   "description": "Multitool attachments, medical devices, shields, food/drink, utility gear"
+  }
+ ],
+ "subcategories": [
+  {
+   "subcategory_id": "S101",
+   "parent_category_id": "C1",
+   "name": "Starter Ships"
+  },
+  {
+   "subcategory_id": "S102",
+   "parent_category_id": "C1",
+   "name": "Fighters"
+  },
+  {
+   "subcategory_id": "S103",
+   "parent_category_id": "C1",
+   "name": "Snub Fighters"
+  },
+  {
+   "subcategory_id": "S104",
+   "parent_category_id": "C1",
+   "name": "Bombers"
+  },
+  {
+   "subcategory_id": "S105",
+   "parent_category_id": "C1",
+   "name": "Gunships"
+  },
+  {
+   "subcategory_id": "S106",
+   "parent_category_id": "C1",
+   "name": "Interdictors"
+  },
+  {
+   "subcategory_id": "S107",
+   "parent_category_id": "C1",
+   "name": "Cargo & Freight"
+  },
+  {
+   "subcategory_id": "S108",
+   "parent_category_id": "C1",
+   "name": "Mining Ships"
+  },
+  {
+   "subcategory_id": "S109",
+   "parent_category_id": "C1",
+   "name": "Salvage Ships"
+  },
+  {
+   "subcategory_id": "S110",
+   "parent_category_id": "C1",
+   "name": "Medical Ships"
+  },
+  {
+   "subcategory_id": "S111",
+   "parent_category_id": "C1",
+   "name": "Repair Ships"
+  },
+  {
+   "subcategory_id": "S112",
+   "parent_category_id": "C1",
+   "name": "Refinery Ships"
+  },
+  {
+   "subcategory_id": "S113",
+   "parent_category_id": "C1",
+   "name": "Multi-Role Support (Refuel/Rearm/Repair)"
+  },
+  {
+   "subcategory_id": "S114",
+   "parent_category_id": "C1",
+   "name": "Exploration Ships"
+  },
+  {
+   "subcategory_id": "S115",
+   "parent_category_id": "C1",
+   "name": "Racing Ships"
+  },
+  {
+   "subcategory_id": "S116",
+   "parent_category_id": "C1",
+   "name": "Passenger & Touring Ships"
+  },
+  {
+   "subcategory_id": "S117",
+   "parent_category_id": "C1",
+   "name": "Reconnaissance Ships"
+  },
+  {
+   "subcategory_id": "S118",
+   "parent_category_id": "C1",
+   "name": "Multi-Crew / Capital Ships"
+  },
+  {
+   "subcategory_id": "S119",
+   "parent_category_id": "C1",
+   "name": "Ground Vehicles - Combat"
+  },
+  {
+   "subcategory_id": "S120",
+   "parent_category_id": "C1",
+   "name": "Ground Vehicles - Utility"
+  },
+  {
+   "subcategory_id": "S121",
+   "parent_category_id": "C1",
+   "name": "Dropships & Troop Transports"
+  },
+  {
+   "subcategory_id": "S201",
+   "parent_category_id": "C2",
+   "name": "Power Plants"
+  },
+  {
+   "subcategory_id": "S202",
+   "parent_category_id": "C2",
+   "name": "Coolers"
+  },
+  {
+   "subcategory_id": "S203",
+   "parent_category_id": "C2",
+   "name": "Shield Generators"
+  },
+  {
+   "subcategory_id": "S204",
+   "parent_category_id": "C2",
+   "name": "Quantum Drives"
+  },
+  {
+   "subcategory_id": "S205",
+   "parent_category_id": "C2",
+   "name": "Jump Modules"
+  },
+  {
+   "subcategory_id": "S206",
+   "parent_category_id": "C2",
+   "name": "Quantum Fuel Tanks"
+  },
+  {
+   "subcategory_id": "S207",
+   "parent_category_id": "C2",
+   "name": "Hydrogen Fuel Tanks"
+  },
+  {
+   "subcategory_id": "S208",
+   "parent_category_id": "C2",
+   "name": "Fuel Intakes"
+  },
+  {
+   "subcategory_id": "S209",
+   "parent_category_id": "C2",
+   "name": "Fuel Pods"
+  },
+  {
+   "subcategory_id": "S210",
+   "parent_category_id": "C2",
+   "name": "Main Thrusters"
+  },
+  {
+   "subcategory_id": "S211",
+   "parent_category_id": "C2",
+   "name": "Maneuvering Thrusters"
+  },
+  {
+   "subcategory_id": "S212",
+   "parent_category_id": "C2",
+   "name": "Batteries"
+  },
+  {
+   "subcategory_id": "S213",
+   "parent_category_id": "C2",
+   "name": "Life Support Generators"
+  },
+  {
+   "subcategory_id": "S214",
+   "parent_category_id": "C2",
+   "name": "Computers & Avionics"
+  },
+  {
+   "subcategory_id": "S215",
+   "parent_category_id": "C2",
+   "name": "Radar & Sensors"
+  },
+  {
+   "subcategory_id": "S216",
+   "parent_category_id": "C2",
+   "name": "Ship Weapons - Ballistic"
+  },
+  {
+   "subcategory_id": "S217",
+   "parent_category_id": "C2",
+   "name": "Ship Weapons - Energy (Laser)"
+  },
+  {
+   "subcategory_id": "S218",
+   "parent_category_id": "C2",
+   "name": "Ship Weapons - Plasma"
+  },
+  {
+   "subcategory_id": "S219",
+   "parent_category_id": "C2",
+   "name": "Ship Weapons - Distortion"
+  },
+  {
+   "subcategory_id": "S220",
+   "parent_category_id": "C2",
+   "name": "Turrets & Gun Mounts"
+  },
+  {
+   "subcategory_id": "S221",
+   "parent_category_id": "C2",
+   "name": "Missiles & Torpedoes"
+  },
+  {
+   "subcategory_id": "S222",
+   "parent_category_id": "C2",
+   "name": "Missile Racks"
+  },
+  {
+   "subcategory_id": "S223",
+   "parent_category_id": "C2",
+   "name": "Mining Laser Heads"
+  },
+  {
+   "subcategory_id": "S224",
+   "parent_category_id": "C2",
+   "name": "Salvage Heads"
+  },
+  {
+   "subcategory_id": "S225",
+   "parent_category_id": "C2",
+   "name": "Tractor Beams (Ship-Mounted)"
+  },
+  {
+   "subcategory_id": "S226",
+   "parent_category_id": "C2",
+   "name": "Cargo Grids & Pods"
+  },
+  {
+   "subcategory_id": "S227",
+   "parent_category_id": "C2",
+   "name": "Ship Armor (Hull Plating)"
+  },
+  {
+   "subcategory_id": "S228",
+   "parent_category_id": "C2",
+   "name": "EMP & Countermeasure Systems"
+  },
+  {
+   "subcategory_id": "S301",
+   "parent_category_id": "C3",
+   "name": "Pistols"
+  },
+  {
+   "subcategory_id": "S302",
+   "parent_category_id": "C3",
+   "name": "SMGs"
+  },
+  {
+   "subcategory_id": "S303",
+   "parent_category_id": "C3",
+   "name": "Assault Rifles"
+  },
+  {
+   "subcategory_id": "S304",
+   "parent_category_id": "C3",
+   "name": "Sniper / Long-Range Rifles"
+  },
+  {
+   "subcategory_id": "S305",
+   "parent_category_id": "C3",
+   "name": "Shotguns"
+  },
+  {
+   "subcategory_id": "S306",
+   "parent_category_id": "C3",
+   "name": "Light Machine Guns"
+  },
+  {
+   "subcategory_id": "S307",
+   "parent_category_id": "C3",
+   "name": "Rocket & Missile Launchers"
+  },
+  {
+   "subcategory_id": "S308",
+   "parent_category_id": "C3",
+   "name": "Grenades"
+  },
+  {
+   "subcategory_id": "S309",
+   "parent_category_id": "C3",
+   "name": "Anti-Personnel Mines"
+  },
+  {
+   "subcategory_id": "S310",
+   "parent_category_id": "C3",
+   "name": "Knives & Melee"
+  },
+  {
+   "subcategory_id": "S311",
+   "parent_category_id": "C3",
+   "name": "Weapon Attachments"
+  },
+  {
+   "subcategory_id": "S401",
+   "parent_category_id": "C4",
+   "name": "Helmets"
+  },
+  {
+   "subcategory_id": "S402",
+   "parent_category_id": "C4",
+   "name": "Torso / Core Armor"
+  },
+  {
+   "subcategory_id": "S403",
+   "parent_category_id": "C4",
+   "name": "Arm Armor"
+  },
+  {
+   "subcategory_id": "S404",
+   "parent_category_id": "C4",
+   "name": "Leg Armor"
+  },
+  {
+   "subcategory_id": "S405",
+   "parent_category_id": "C4",
+   "name": "Undersuits"
+  },
+  {
+   "subcategory_id": "S406",
+   "parent_category_id": "C4",
+   "name": "Backpacks"
+  },
+  {
+   "subcategory_id": "S407",
+   "parent_category_id": "C4",
+   "name": "Light Armor Sets"
+  },
+  {
+   "subcategory_id": "S408",
+   "parent_category_id": "C4",
+   "name": "Medium Armor Sets"
+  },
+  {
+   "subcategory_id": "S409",
+   "parent_category_id": "C4",
+   "name": "Heavy Armor Sets"
+  },
+  {
+   "subcategory_id": "S410",
+   "parent_category_id": "C4",
+   "name": "Flight Suits"
+  },
+  {
+   "subcategory_id": "S411",
+   "parent_category_id": "C4",
+   "name": "Casual Clothing"
+  },
+  {
+   "subcategory_id": "S501",
+   "parent_category_id": "C5",
+   "name": "Metals"
+  },
+  {
+   "subcategory_id": "S502",
+   "parent_category_id": "C5",
+   "name": "Minerals & Gemstones"
+  },
+  {
+   "subcategory_id": "S503",
+   "parent_category_id": "C5",
+   "name": "Non-Metals"
+  },
+  {
+   "subcategory_id": "S504",
+   "parent_category_id": "C5",
+   "name": "Gases"
+  },
+  {
+   "subcategory_id": "S505",
+   "parent_category_id": "C5",
+   "name": "Agricultural & Organic"
+  },
+  {
+   "subcategory_id": "S506",
+   "parent_category_id": "C5",
+   "name": "Processed Goods"
+  },
+  {
+   "subcategory_id": "S507",
+   "parent_category_id": "C5",
+   "name": "Medical Supplies"
+  },
+  {
+   "subcategory_id": "S508",
+   "parent_category_id": "C5",
+   "name": "Waste & Scrap"
+  },
+  {
+   "subcategory_id": "S509",
+   "parent_category_id": "C5",
+   "name": "Legal & Controlled Drugs"
+  },
+  {
+   "subcategory_id": "S510",
+   "parent_category_id": "C5",
+   "name": "Tradeable Fuel"
+  },
+  {
+   "subcategory_id": "S601",
+   "parent_category_id": "C6",
+   "name": "Multitool Attachments"
+  },
+  {
+   "subcategory_id": "S602",
+   "parent_category_id": "C6",
+   "name": "Medical Devices"
+  },
+  {
+   "subcategory_id": "S603",
+   "parent_category_id": "C6",
+   "name": "Personal Shields"
+  },
+  {
+   "subcategory_id": "S604",
+   "parent_category_id": "C6",
+   "name": "Utility Tools & Beacons"
+  },
+  {
+   "subcategory_id": "S605",
+   "parent_category_id": "C6",
+   "name": "Food & Drink"
+  }
+ ],
+ "items": [
+  {
+   "item_id": "I0001",
+   "subcategory_id": "S101",
+   "name": "Aurora MR",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0002",
+   "subcategory_id": "S101",
+   "name": "Aurora LN",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0003",
+   "subcategory_id": "S101",
+   "name": "Mustang Alpha",
+   "manufacturer": "Consolidated Outland",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0004",
+   "subcategory_id": "S101",
+   "name": "Mustang Beta",
+   "manufacturer": "Consolidated Outland",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0005",
+   "subcategory_id": "S101",
+   "name": "Avenger Titan",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0006",
+   "subcategory_id": "S101",
+   "name": "Cutter",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0007",
+   "subcategory_id": "S101",
+   "name": "Nomad",
+   "manufacturer": "Consolidated Outland",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0008",
+   "subcategory_id": "S101",
+   "name": "100i",
+   "manufacturer": "Origin Jumpworks",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": "Representative list; RSI adds/rotates starter ships periodically"
+  },
+  {
+   "item_id": "I0009",
+   "subcategory_id": "S102",
+   "name": "Gladius",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0010",
+   "subcategory_id": "S102",
+   "name": "Sabre",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0011",
+   "subcategory_id": "S102",
+   "name": "Sabre Comet",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0012",
+   "subcategory_id": "S102",
+   "name": "Hornet F7C Mk2",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0013",
+   "subcategory_id": "S102",
+   "name": "F7C-M Super Hornet",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0014",
+   "subcategory_id": "S102",
+   "name": "Arrow",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0015",
+   "subcategory_id": "S102",
+   "name": "Hurricane",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0016",
+   "subcategory_id": "S102",
+   "name": "Buccaneer",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0017",
+   "subcategory_id": "S102",
+   "name": "Vanguard Warden",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0018",
+   "subcategory_id": "S102",
+   "name": "Lightning F8C",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0019",
+   "subcategory_id": "S102",
+   "name": "Scorpius",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0020",
+   "subcategory_id": "S102",
+   "name": "Talon",
+   "manufacturer": "Esperia",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0021",
+   "subcategory_id": "S102",
+   "name": "Talon Shrike",
+   "manufacturer": "Esperia",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0022",
+   "subcategory_id": "S102",
+   "name": "Xi'an Scout",
+   "manufacturer": "Aopoa",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0023",
+   "subcategory_id": "S102",
+   "name": "Mirai Fury",
+   "manufacturer": "Mirai",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0024",
+   "subcategory_id": "S103",
+   "name": "Dragonfly",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0025",
+   "subcategory_id": "S103",
+   "name": "Nox",
+   "manufacturer": "Aopoa",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0026",
+   "subcategory_id": "S103",
+   "name": "Nox Kue",
+   "manufacturer": "Aopoa",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0027",
+   "subcategory_id": "S104",
+   "name": "Gladiator",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0028",
+   "subcategory_id": "S104",
+   "name": "B2 Hercules Bomber Kit",
+   "manufacturer": "Crusader Industries",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0029",
+   "subcategory_id": "S105",
+   "name": "Eclipse",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0030",
+   "subcategory_id": "S105",
+   "name": "Redeemer",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0031",
+   "subcategory_id": "S105",
+   "name": "Ares Ion",
+   "manufacturer": "Crusader Industries",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0032",
+   "subcategory_id": "S105",
+   "name": "Ares Inferno",
+   "manufacturer": "Crusader Industries",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0033",
+   "subcategory_id": "S106",
+   "name": "Interceptor",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0034",
+   "subcategory_id": "S107",
+   "name": "Freelancer",
+   "manufacturer": "MISC",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0035",
+   "subcategory_id": "S107",
+   "name": "Freelancer MAX",
+   "manufacturer": "MISC",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0036",
+   "subcategory_id": "S107",
+   "name": "Caterpillar",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0037",
+   "subcategory_id": "S107",
+   "name": "Hull A",
+   "manufacturer": "MISC",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0038",
+   "subcategory_id": "S107",
+   "name": "Hull C",
+   "manufacturer": "MISC",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0039",
+   "subcategory_id": "S107",
+   "name": "Cutlass Black",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0040",
+   "subcategory_id": "S107",
+   "name": "C2 Hercules",
+   "manufacturer": "Crusader Industries",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0041",
+   "subcategory_id": "S108",
+   "name": "Prospector",
+   "manufacturer": "MISC",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0042",
+   "subcategory_id": "S108",
+   "name": "Mole",
+   "manufacturer": "Argo Astronautics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0043",
+   "subcategory_id": "S108",
+   "name": "Golem",
+   "manufacturer": "Greycat Industrial",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0044",
+   "subcategory_id": "S109",
+   "name": "Vulture",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0045",
+   "subcategory_id": "S109",
+   "name": "Reclaimer",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0046",
+   "subcategory_id": "S109",
+   "name": "Vulcan",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0047",
+   "subcategory_id": "S110",
+   "name": "Cutlass Red",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0048",
+   "subcategory_id": "S110",
+   "name": "Apollo Triage",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0049",
+   "subcategory_id": "S110",
+   "name": "Apollo Medivac",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0050",
+   "subcategory_id": "S111",
+   "name": "Crucible",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0051",
+   "subcategory_id": "S111",
+   "name": "Vulcan",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0052",
+   "subcategory_id": "S112",
+   "name": "Orion",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0053",
+   "subcategory_id": "S112",
+   "name": "ARGO SRV",
+   "manufacturer": "Argo Astronautics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0054",
+   "subcategory_id": "S113",
+   "name": "Vulcan",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0055",
+   "subcategory_id": "S113",
+   "name": "Genesis Starliner (support role)",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0056",
+   "subcategory_id": "S114",
+   "name": "Terrapin",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0057",
+   "subcategory_id": "S114",
+   "name": "Carrack",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0058",
+   "subcategory_id": "S114",
+   "name": "Mantis",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0059",
+   "subcategory_id": "S114",
+   "name": "315p",
+   "manufacturer": "Origin Jumpworks",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0060",
+   "subcategory_id": "S114",
+   "name": "600i Explorer",
+   "manufacturer": "Origin Jumpworks",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0061",
+   "subcategory_id": "S115",
+   "name": "Mustang X1",
+   "manufacturer": "Consolidated Outland",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0062",
+   "subcategory_id": "S115",
+   "name": "M50",
+   "manufacturer": "Origin Jumpworks",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0063",
+   "subcategory_id": "S115",
+   "name": "350r",
+   "manufacturer": "Origin Jumpworks",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0064",
+   "subcategory_id": "S116",
+   "name": "Genesis Starliner",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0065",
+   "subcategory_id": "S116",
+   "name": "890 Jump",
+   "manufacturer": "Origin Jumpworks",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0066",
+   "subcategory_id": "S117",
+   "name": "Herald",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0067",
+   "subcategory_id": "S117",
+   "name": "Terrapin",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0068",
+   "subcategory_id": "S118",
+   "name": "Idris-P",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0069",
+   "subcategory_id": "S118",
+   "name": "Javelin",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0070",
+   "subcategory_id": "S118",
+   "name": "Polaris",
+   "manufacturer": "RSI",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0071",
+   "subcategory_id": "S118",
+   "name": "Hammerhead",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0072",
+   "subcategory_id": "S118",
+   "name": "Perseus",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0073",
+   "subcategory_id": "S118",
+   "name": "Kraken",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0074",
+   "subcategory_id": "S119",
+   "name": "Nova Tank",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0075",
+   "subcategory_id": "S119",
+   "name": "Ballista",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0076",
+   "subcategory_id": "S120",
+   "name": "Ursa Rover",
+   "manufacturer": "Drake Interplanetary",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0077",
+   "subcategory_id": "S120",
+   "name": "Cyclone",
+   "manufacturer": "Tumbril",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0078",
+   "subcategory_id": "S120",
+   "name": "ROC",
+   "manufacturer": "Greycat Industrial",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0079",
+   "subcategory_id": "S121",
+   "name": "Valkyrie",
+   "manufacturer": "Anvil Aerospace",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0080",
+   "subcategory_id": "S121",
+   "name": "Retaliator",
+   "manufacturer": "Aegis Dynamics",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0081",
+   "subcategory_id": "S201",
+   "name": "Power Plant S1",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": "Sizes 1-10 exist; tracked by size/grade rather than every SKU"
+  },
+  {
+   "item_id": "I0082",
+   "subcategory_id": "S201",
+   "name": "Power Plant S2",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": "Sizes 1-10 exist; tracked by size/grade rather than every SKU"
+  },
+  {
+   "item_id": "I0083",
+   "subcategory_id": "S201",
+   "name": "Power Plant S3",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": "Sizes 1-10 exist; tracked by size/grade rather than every SKU"
+  },
+  {
+   "item_id": "I0084",
+   "subcategory_id": "S201",
+   "name": "Power Plant S4",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": "Sizes 1-10 exist; tracked by size/grade rather than every SKU"
+  },
+  {
+   "item_id": "I0085",
+   "subcategory_id": "S201",
+   "name": "Power Plant S5",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": "Sizes 1-10 exist; tracked by size/grade rather than every SKU"
+  },
+  {
+   "item_id": "I0086",
+   "subcategory_id": "S202",
+   "name": "Cooler S1",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0087",
+   "subcategory_id": "S202",
+   "name": "Cooler S2",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0088",
+   "subcategory_id": "S202",
+   "name": "Cooler S3",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0089",
+   "subcategory_id": "S202",
+   "name": "Cooler S4",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0090",
+   "subcategory_id": "S203",
+   "name": "Shield Generator S1",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0091",
+   "subcategory_id": "S203",
+   "name": "Shield Generator S2",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0092",
+   "subcategory_id": "S203",
+   "name": "Shield Generator S3",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0093",
+   "subcategory_id": "S203",
+   "name": "Shield Generator S4",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0094",
+   "subcategory_id": "S204",
+   "name": "Quantum Drive S1",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0095",
+   "subcategory_id": "S204",
+   "name": "Quantum Drive S2",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0096",
+   "subcategory_id": "S204",
+   "name": "Quantum Drive S3",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0097",
+   "subcategory_id": "S204",
+   "name": "Quantum Drive S4",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0098",
+   "subcategory_id": "S205",
+   "name": "Jump Module",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0099",
+   "subcategory_id": "S206",
+   "name": "Quantum Fuel Tank",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0100",
+   "subcategory_id": "S207",
+   "name": "Hydrogen Fuel Tank",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0101",
+   "subcategory_id": "S208",
+   "name": "Hydrogen Fuel Intake",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0102",
+   "subcategory_id": "S209",
+   "name": "Fuel Pod",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0103",
+   "subcategory_id": "S210",
+   "name": "Main Thruster",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0104",
+   "subcategory_id": "S211",
+   "name": "Maneuvering Thruster - Fixed",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0105",
+   "subcategory_id": "S211",
+   "name": "Maneuvering Thruster - Gimbal",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0106",
+   "subcategory_id": "S212",
+   "name": "Ship Battery",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0107",
+   "subcategory_id": "S213",
+   "name": "Life Support Generator",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0108",
+   "subcategory_id": "S214",
+   "name": "Ship Computer",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0109",
+   "subcategory_id": "S215",
+   "name": "Radar",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0110",
+   "subcategory_id": "S215",
+   "name": "Scanner Array",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0111",
+   "subcategory_id": "S216",
+   "name": "Ballistic Cannon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0112",
+   "subcategory_id": "S216",
+   "name": "Ballistic Gatling",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0113",
+   "subcategory_id": "S216",
+   "name": "Ballistic Repeater",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0114",
+   "subcategory_id": "S217",
+   "name": "Laser Cannon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0115",
+   "subcategory_id": "S217",
+   "name": "Laser Repeater",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0116",
+   "subcategory_id": "S217",
+   "name": "Neutron Cannon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0117",
+   "subcategory_id": "S218",
+   "name": "Plasma Cannon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0118",
+   "subcategory_id": "S219",
+   "name": "Distortion Cannon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0119",
+   "subcategory_id": "S219",
+   "name": "Distortion Scattergun",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0120",
+   "subcategory_id": "S220",
+   "name": "Manned Turret",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0121",
+   "subcategory_id": "S220",
+   "name": "Remote Turret",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0122",
+   "subcategory_id": "S221",
+   "name": "Size 1 Missile",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0123",
+   "subcategory_id": "S221",
+   "name": "Size 2 Missile",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0124",
+   "subcategory_id": "S221",
+   "name": "Size 3 Missile",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0125",
+   "subcategory_id": "S221",
+   "name": "Torpedo",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0126",
+   "subcategory_id": "S222",
+   "name": "Missile Rack",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0127",
+   "subcategory_id": "S223",
+   "name": "Mining Laser Head - Standard",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0128",
+   "subcategory_id": "S223",
+   "name": "Mining Laser Head - Specialized",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0129",
+   "subcategory_id": "S224",
+   "name": "Salvage Head - Tractor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0130",
+   "subcategory_id": "S224",
+   "name": "Salvage Head - Structural/Cutting",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0131",
+   "subcategory_id": "S225",
+   "name": "Ship Tractor Beam",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0132",
+   "subcategory_id": "S226",
+   "name": "Cargo Grid",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0133",
+   "subcategory_id": "S226",
+   "name": "Cargo Pod",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0134",
+   "subcategory_id": "S227",
+   "name": "Hull Plating - Light",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0135",
+   "subcategory_id": "S227",
+   "name": "Hull Plating - Heavy",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0136",
+   "subcategory_id": "S228",
+   "name": "EMP Generator",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0137",
+   "subcategory_id": "S228",
+   "name": "Countermeasure Launcher (Chaff/Flare)",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0138",
+   "subcategory_id": "S301",
+   "name": "Arclight",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0139",
+   "subcategory_id": "S301",
+   "name": "Coda",
+   "manufacturer": "Gemini",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0140",
+   "subcategory_id": "S301",
+   "name": "LH86",
+   "manufacturer": "Lightning Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0141",
+   "subcategory_id": "S301",
+   "name": "P4-AR",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0142",
+   "subcategory_id": "S302",
+   "name": "C54",
+   "manufacturer": "Klaus & Werner",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0143",
+   "subcategory_id": "S302",
+   "name": "Custodian",
+   "manufacturer": "Gemini",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0144",
+   "subcategory_id": "S302",
+   "name": "Lumin V",
+   "manufacturer": "Gemini",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0145",
+   "subcategory_id": "S303",
+   "name": "Gallant",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0146",
+   "subcategory_id": "S303",
+   "name": "Karna",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0147",
+   "subcategory_id": "S303",
+   "name": "Killshot",
+   "manufacturer": "Klaus & Werner",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0148",
+   "subcategory_id": "S303",
+   "name": "P8-AR",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0149",
+   "subcategory_id": "S303",
+   "name": "CQ7",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0150",
+   "subcategory_id": "S304",
+   "name": "Arrowhead",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0151",
+   "subcategory_id": "S304",
+   "name": "Atzkav",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0152",
+   "subcategory_id": "S304",
+   "name": "P6-LR",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0153",
+   "subcategory_id": "S305",
+   "name": "BR-2",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0154",
+   "subcategory_id": "S305",
+   "name": "Deadrig",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0155",
+   "subcategory_id": "S305",
+   "name": "Devastator",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0156",
+   "subcategory_id": "S306",
+   "name": "Demeco",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0157",
+   "subcategory_id": "S306",
+   "name": "F55",
+   "manufacturer": "Klaus & Werner",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0158",
+   "subcategory_id": "S306",
+   "name": "Fresnel",
+   "manufacturer": "Gemini",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0159",
+   "subcategory_id": "S306",
+   "name": "FS-9",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0160",
+   "subcategory_id": "S307",
+   "name": "Animus Missile Launcher",
+   "manufacturer": "Apocalypse Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0161",
+   "subcategory_id": "S307",
+   "name": "Boomtube Rocket Launcher",
+   "manufacturer": "Apocalypse Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0162",
+   "subcategory_id": "S308",
+   "name": "Frag Grenade",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0163",
+   "subcategory_id": "S308",
+   "name": "Smoke Grenade",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0164",
+   "subcategory_id": "S308",
+   "name": "Flashbang",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0165",
+   "subcategory_id": "S308",
+   "name": "GP-33 MOD Grenade Launcher Attachment",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0166",
+   "subcategory_id": "S309",
+   "name": "Anti-Personnel Mine",
+   "manufacturer": "Behring",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0167",
+   "subcategory_id": "S310",
+   "name": "Combat Knife",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0168",
+   "subcategory_id": "S310",
+   "name": "Bakor Knife",
+   "manufacturer": "Kastak Arms",
+   "unit": "each",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0169",
+   "subcategory_id": "S311",
+   "name": "Weapon Scope",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0170",
+   "subcategory_id": "S311",
+   "name": "Extended Magazine",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0171",
+   "subcategory_id": "S311",
+   "name": "Underbarrel Grip",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0172",
+   "subcategory_id": "S311",
+   "name": "Suppressor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0173",
+   "subcategory_id": "S401",
+   "name": "Light Helmet",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0174",
+   "subcategory_id": "S401",
+   "name": "Medium Helmet",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0175",
+   "subcategory_id": "S401",
+   "name": "Heavy Helmet",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0176",
+   "subcategory_id": "S402",
+   "name": "Light Torso Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0177",
+   "subcategory_id": "S402",
+   "name": "Medium Torso Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0178",
+   "subcategory_id": "S402",
+   "name": "Heavy Torso Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0179",
+   "subcategory_id": "S403",
+   "name": "Light Arm Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0180",
+   "subcategory_id": "S403",
+   "name": "Medium Arm Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0181",
+   "subcategory_id": "S403",
+   "name": "Heavy Arm Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0182",
+   "subcategory_id": "S404",
+   "name": "Light Leg Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0183",
+   "subcategory_id": "S404",
+   "name": "Medium Leg Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0184",
+   "subcategory_id": "S404",
+   "name": "Heavy Leg Armor",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0185",
+   "subcategory_id": "S405",
+   "name": "Standard Undersuit",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0186",
+   "subcategory_id": "S405",
+   "name": "Insulated Undersuit",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0187",
+   "subcategory_id": "S406",
+   "name": "Small Backpack",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0188",
+   "subcategory_id": "S406",
+   "name": "Medium Backpack",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0189",
+   "subcategory_id": "S406",
+   "name": "Large Backpack",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0190",
+   "subcategory_id": "S407",
+   "name": "Mercenary Light Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0191",
+   "subcategory_id": "S407",
+   "name": "Explorer Light Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0192",
+   "subcategory_id": "S408",
+   "name": "Medium Combat Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0193",
+   "subcategory_id": "S408",
+   "name": "Pathfinder Medium Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0194",
+   "subcategory_id": "S409",
+   "name": "Heavy Assault Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0195",
+   "subcategory_id": "S409",
+   "name": "Titan Heavy Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0196",
+   "subcategory_id": "S409",
+   "name": "Super Heavy Armor",
+   "manufacturer": "Various",
+   "unit": "set",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0197",
+   "subcategory_id": "S410",
+   "name": "Flight Suit",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0198",
+   "subcategory_id": "S411",
+   "name": "Casual Jacket",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0199",
+   "subcategory_id": "S411",
+   "name": "Casual Pants",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0200",
+   "subcategory_id": "S411",
+   "name": "Casual Shirt",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0201",
+   "subcategory_id": "S501",
+   "name": "Aluminum",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0202",
+   "subcategory_id": "S501",
+   "name": "Copper",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0203",
+   "subcategory_id": "S501",
+   "name": "Gold",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0204",
+   "subcategory_id": "S501",
+   "name": "Iron",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0205",
+   "subcategory_id": "S501",
+   "name": "Titanium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0206",
+   "subcategory_id": "S501",
+   "name": "Tungsten",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0207",
+   "subcategory_id": "S501",
+   "name": "Silver",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0208",
+   "subcategory_id": "S501",
+   "name": "Platinum",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0209",
+   "subcategory_id": "S501",
+   "name": "Osmium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0210",
+   "subcategory_id": "S501",
+   "name": "Corundum",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0211",
+   "subcategory_id": "S501",
+   "name": "Agricium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0212",
+   "subcategory_id": "S501",
+   "name": "Tin",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0213",
+   "subcategory_id": "S502",
+   "name": "Diamond",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0214",
+   "subcategory_id": "S502",
+   "name": "Quartz",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0215",
+   "subcategory_id": "S502",
+   "name": "Beryl",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0216",
+   "subcategory_id": "S502",
+   "name": "Bexalite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0217",
+   "subcategory_id": "S502",
+   "name": "Borase",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0218",
+   "subcategory_id": "S502",
+   "name": "Laranite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0219",
+   "subcategory_id": "S502",
+   "name": "Taranite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0220",
+   "subcategory_id": "S502",
+   "name": "Quantainium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0221",
+   "subcategory_id": "S502",
+   "name": "Dolivine",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0222",
+   "subcategory_id": "S502",
+   "name": "Hadanite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0223",
+   "subcategory_id": "S503",
+   "name": "Carbon",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0224",
+   "subcategory_id": "S503",
+   "name": "Silicon",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0225",
+   "subcategory_id": "S503",
+   "name": "Iodine",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0226",
+   "subcategory_id": "S503",
+   "name": "Astatine",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0227",
+   "subcategory_id": "S504",
+   "name": "Hydrogen",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0228",
+   "subcategory_id": "S504",
+   "name": "Helium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0229",
+   "subcategory_id": "S504",
+   "name": "Nitrogen",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0230",
+   "subcategory_id": "S504",
+   "name": "Oxygen",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0231",
+   "subcategory_id": "S504",
+   "name": "Argon",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0232",
+   "subcategory_id": "S504",
+   "name": "Chlorine",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0233",
+   "subcategory_id": "S504",
+   "name": "Fluorine",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0234",
+   "subcategory_id": "S504",
+   "name": "Ammonia",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0235",
+   "subcategory_id": "S504",
+   "name": "Methane",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0236",
+   "subcategory_id": "S505",
+   "name": "Agricultural Supplies",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0237",
+   "subcategory_id": "S505",
+   "name": "Fresh Food",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0238",
+   "subcategory_id": "S505",
+   "name": "Distilled Spirits",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0239",
+   "subcategory_id": "S505",
+   "name": "Fresh Produce (misc.)",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0240",
+   "subcategory_id": "S505",
+   "name": "Livestock Feed",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0241",
+   "subcategory_id": "S506",
+   "name": "Processed Food",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0242",
+   "subcategory_id": "S506",
+   "name": "Construction Materials",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0243",
+   "subcategory_id": "S506",
+   "name": "Recycled Material Composite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0244",
+   "subcategory_id": "S506",
+   "name": "Ship Ammunition",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0245",
+   "subcategory_id": "S506",
+   "name": "Ceramic Composite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0246",
+   "subcategory_id": "S506",
+   "name": "Consumer Goods",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0247",
+   "subcategory_id": "S507",
+   "name": "Medical Supplies",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0248",
+   "subcategory_id": "S507",
+   "name": "MedGel",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0249",
+   "subcategory_id": "S507",
+   "name": "Stims (Medical)",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0250",
+   "subcategory_id": "S508",
+   "name": "Waste",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0251",
+   "subcategory_id": "S508",
+   "name": "Scrap",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0252",
+   "subcategory_id": "S508",
+   "name": "Inert Materials",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0253",
+   "subcategory_id": "S509",
+   "name": "WiDoW",
+   "manufacturer": "illegal",
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Illegal in most jurisdictions; track separately for legal-risk visibility"
+  },
+  {
+   "item_id": "I0254",
+   "subcategory_id": "S509",
+   "name": "Maze",
+   "manufacturer": "illegal",
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Illegal in most jurisdictions; track separately for legal-risk visibility"
+  },
+  {
+   "item_id": "I0255",
+   "subcategory_id": "S509",
+   "name": "SLAM",
+   "manufacturer": "illegal",
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Illegal in most jurisdictions; track separately for legal-risk visibility"
+  },
+  {
+   "item_id": "I0256",
+   "subcategory_id": "S509",
+   "name": "Neon",
+   "manufacturer": "illegal",
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Illegal in most jurisdictions; track separately for legal-risk visibility"
+  },
+  {
+   "item_id": "I0257",
+   "subcategory_id": "S509",
+   "name": "E'tam",
+   "manufacturer": "illegal",
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Illegal in most jurisdictions; track separately for legal-risk visibility"
+  },
+  {
+   "item_id": "I0258",
+   "subcategory_id": "S509",
+   "name": "Altruciatoxin",
+   "manufacturer": "illegal",
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Illegal in most jurisdictions; track separately for legal-risk visibility"
+  },
+  {
+   "item_id": "I0259",
+   "subcategory_id": "S510",
+   "name": "Hydrogen Fuel",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0260",
+   "subcategory_id": "S510",
+   "name": "Quantum Fuel",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0261",
+   "subcategory_id": "S601",
+   "name": "Tractor Beam Attachment",
+   "manufacturer": "Greycat Industrial",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0262",
+   "subcategory_id": "S601",
+   "name": "Mining Attachment",
+   "manufacturer": "Greycat Industrial",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0263",
+   "subcategory_id": "S601",
+   "name": "Salvage Attachment",
+   "manufacturer": "Greycat Industrial",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0264",
+   "subcategory_id": "S601",
+   "name": "Ping/Scan Attachment",
+   "manufacturer": "Greycat Industrial",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0265",
+   "subcategory_id": "S602",
+   "name": "MedPen",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0266",
+   "subcategory_id": "S602",
+   "name": "MedGun",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0267",
+   "subcategory_id": "S602",
+   "name": "Diagnostic Scanner",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0268",
+   "subcategory_id": "S603",
+   "name": "Personal Shield Generator",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0269",
+   "subcategory_id": "S604",
+   "name": "Handheld Beacon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0270",
+   "subcategory_id": "S604",
+   "name": "Flashlight",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0271",
+   "subcategory_id": "S604",
+   "name": "Comm Relay Beacon",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0272",
+   "subcategory_id": "S605",
+   "name": "Water Bottle",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0273",
+   "subcategory_id": "S605",
+   "name": "Ration Pack",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0274",
+   "subcategory_id": "S605",
+   "name": "Coffee/Drink Item",
+   "manufacturer": "Various",
+   "unit": "unit",
+   "grade": null,
+   "class": null,
+   "notes": null
+  },
+  {
+   "item_id": "I0275",
+   "subcategory_id": "S501",
+   "name": "Aslarite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0276",
+   "subcategory_id": "S501",
+   "name": "Hephaestanite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0277",
+   "subcategory_id": "S501",
+   "name": "Lindinium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0278",
+   "subcategory_id": "S501",
+   "name": "Ouratite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0279",
+   "subcategory_id": "S501",
+   "name": "Pressurized Ice",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; mineable volatile/ice resource, not a true metal"
+  },
+  {
+   "item_id": "I0280",
+   "subcategory_id": "S501",
+   "name": "Riccite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0281",
+   "subcategory_id": "S501",
+   "name": "Saldynium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0282",
+   "subcategory_id": "S501",
+   "name": "Savrilium",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0283",
+   "subcategory_id": "S501",
+   "name": "Stileron",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0284",
+   "subcategory_id": "S501",
+   "name": "Torite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0285",
+   "subcategory_id": "S502",
+   "name": "Aphorite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0286",
+   "subcategory_id": "S502",
+   "name": "Beradom",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0287",
+   "subcategory_id": "S502",
+   "name": "Carinite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0288",
+   "subcategory_id": "S502",
+   "name": "Feynmaline",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0289",
+   "subcategory_id": "S502",
+   "name": "Glacosite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0290",
+   "subcategory_id": "S502",
+   "name": "Janalite",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  },
+  {
+   "item_id": "I0291",
+   "subcategory_id": "S502",
+   "name": "Sadaryx",
+   "manufacturer": null,
+   "unit": "SCU",
+   "grade": null,
+   "class": null,
+   "notes": "Confirmed via starcitizen.tools/Ore_quality; not in original starter list"
+  }
+ ],
+ "ore_mineral_quality": [
+  {
+   "item_id": "I0211",
+   "material_type": "Ore",
+   "tier_f_min": 346,
+   "tier_e_min": 588,
+   "tier_d_min": 667,
+   "tier_c_min": 796,
+   "tier_b_min": 852,
+   "tier_a_min": 943,
+   "tier_s_min": 971,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0201",
+   "material_type": "Ore",
+   "tier_f_min": 318,
+   "tier_e_min": 511,
+   "tier_d_min": 614,
+   "tier_c_min": 783,
+   "tier_b_min": 896,
+   "tier_a_min": 919,
+   "tier_s_min": 953,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0275",
+   "material_type": "Ore",
+   "tier_f_min": 287,
+   "tier_e_min": 575,
+   "tier_d_min": 602,
+   "tier_c_min": 741,
+   "tier_b_min": 854,
+   "tier_a_min": 927,
+   "tier_s_min": 963,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0215",
+   "material_type": "Ore",
+   "tier_f_min": 324,
+   "tier_e_min": 547,
+   "tier_d_min": 677,
+   "tier_c_min": 717,
+   "tier_b_min": 860,
+   "tier_a_min": 937,
+   "tier_s_min": 955,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0216",
+   "material_type": "Ore",
+   "tier_f_min": 302,
+   "tier_e_min": 597,
+   "tier_d_min": 632,
+   "tier_c_min": 756,
+   "tier_b_min": 875,
+   "tier_a_min": 941,
+   "tier_s_min": 959,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0217",
+   "material_type": "Ore",
+   "tier_f_min": 359,
+   "tier_e_min": 584,
+   "tier_d_min": 676,
+   "tier_c_min": 743,
+   "tier_b_min": 892,
+   "tier_a_min": 903,
+   "tier_s_min": 976,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0202",
+   "material_type": "Ore",
+   "tier_f_min": 359,
+   "tier_e_min": 593,
+   "tier_d_min": 652,
+   "tier_c_min": 742,
+   "tier_b_min": 855,
+   "tier_a_min": 917,
+   "tier_s_min": 958,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0210",
+   "material_type": "Ore",
+   "tier_f_min": 318,
+   "tier_e_min": 504,
+   "tier_d_min": 665,
+   "tier_c_min": 793,
+   "tier_b_min": 886,
+   "tier_a_min": 904,
+   "tier_s_min": 971,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0203",
+   "material_type": "Ore",
+   "tier_f_min": 359,
+   "tier_e_min": 553,
+   "tier_d_min": 644,
+   "tier_c_min": 786,
+   "tier_b_min": 864,
+   "tier_a_min": 916,
+   "tier_s_min": 959,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0276",
+   "material_type": "Ore",
+   "tier_f_min": 330,
+   "tier_e_min": 572,
+   "tier_d_min": 692,
+   "tier_c_min": 758,
+   "tier_b_min": 896,
+   "tier_a_min": 916,
+   "tier_s_min": 975,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0204",
+   "material_type": "Ore",
+   "tier_f_min": 325,
+   "tier_e_min": 521,
+   "tier_d_min": 664,
+   "tier_c_min": 710,
+   "tier_b_min": 874,
+   "tier_a_min": 907,
+   "tier_s_min": 970,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0218",
+   "material_type": "Ore",
+   "tier_f_min": 298,
+   "tier_e_min": 510,
+   "tier_d_min": 698,
+   "tier_c_min": 707,
+   "tier_b_min": 858,
+   "tier_a_min": 910,
+   "tier_s_min": 975,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0277",
+   "material_type": "Ore",
+   "tier_f_min": 305,
+   "tier_e_min": 585,
+   "tier_d_min": 618,
+   "tier_c_min": 729,
+   "tier_b_min": 853,
+   "tier_a_min": 930,
+   "tier_s_min": 954,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0278",
+   "material_type": "Ore",
+   "tier_f_min": 310,
+   "tier_e_min": 523,
+   "tier_d_min": 647,
+   "tier_c_min": 779,
+   "tier_b_min": 860,
+   "tier_a_min": 912,
+   "tier_s_min": 960,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0279",
+   "material_type": "Ore",
+   "tier_f_min": 322,
+   "tier_e_min": 561,
+   "tier_d_min": 659,
+   "tier_c_min": 714,
+   "tier_b_min": 873,
+   "tier_a_min": 922,
+   "tier_s_min": 966,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0220",
+   "material_type": "Ore",
+   "tier_f_min": 344,
+   "tier_e_min": 514,
+   "tier_d_min": 669,
+   "tier_c_min": 762,
+   "tier_b_min": 852,
+   "tier_a_min": 901,
+   "tier_s_min": 974,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0214",
+   "material_type": "Ore",
+   "tier_f_min": 330,
+   "tier_e_min": 552,
+   "tier_d_min": 641,
+   "tier_c_min": 710,
+   "tier_b_min": 899,
+   "tier_a_min": 914,
+   "tier_s_min": 969,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0280",
+   "material_type": "Ore",
+   "tier_f_min": 325,
+   "tier_e_min": 525,
+   "tier_d_min": 671,
+   "tier_c_min": 743,
+   "tier_b_min": 870,
+   "tier_a_min": 942,
+   "tier_s_min": 965,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0281",
+   "material_type": "Ore",
+   "tier_f_min": 301,
+   "tier_e_min": 575,
+   "tier_d_min": 674,
+   "tier_c_min": 757,
+   "tier_b_min": 861,
+   "tier_a_min": 938,
+   "tier_s_min": 955,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0282",
+   "material_type": "Ore",
+   "tier_f_min": 322,
+   "tier_e_min": 580,
+   "tier_d_min": 636,
+   "tier_c_min": 776,
+   "tier_b_min": 878,
+   "tier_a_min": 905,
+   "tier_s_min": 967,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0224",
+   "material_type": "Ore",
+   "tier_f_min": 310,
+   "tier_e_min": 510,
+   "tier_d_min": 672,
+   "tier_c_min": 782,
+   "tier_b_min": 889,
+   "tier_a_min": 926,
+   "tier_s_min": 968,
+   "tier_perfect": 1000,
+   "notes": "Not currently in Items catalog - add if your org tracks this material"
+  },
+  {
+   "item_id": "I0283",
+   "material_type": "Ore",
+   "tier_f_min": 330,
+   "tier_e_min": 517,
+   "tier_d_min": 681,
+   "tier_c_min": 747,
+   "tier_b_min": 874,
+   "tier_a_min": 947,
+   "tier_s_min": 972,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0219",
+   "material_type": "Ore",
+   "tier_f_min": 310,
+   "tier_e_min": 525,
+   "tier_d_min": 646,
+   "tier_c_min": 718,
+   "tier_b_min": 853,
+   "tier_a_min": 925,
+   "tier_s_min": 957,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0212",
+   "material_type": "Ore",
+   "tier_f_min": 340,
+   "tier_e_min": 537,
+   "tier_d_min": 664,
+   "tier_c_min": 704,
+   "tier_b_min": 880,
+   "tier_a_min": 940,
+   "tier_s_min": 964,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0205",
+   "material_type": "Ore",
+   "tier_f_min": 295,
+   "tier_e_min": 516,
+   "tier_d_min": 622,
+   "tier_c_min": 784,
+   "tier_b_min": 866,
+   "tier_a_min": 916,
+   "tier_s_min": 959,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0284",
+   "material_type": "Ore",
+   "tier_f_min": 262,
+   "tier_e_min": 528,
+   "tier_d_min": 661,
+   "tier_c_min": 785,
+   "tier_b_min": 873,
+   "tier_a_min": 944,
+   "tier_s_min": 951,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0206",
+   "material_type": "Ore",
+   "tier_f_min": 363,
+   "tier_e_min": 530,
+   "tier_d_min": 662,
+   "tier_c_min": 787,
+   "tier_b_min": 858,
+   "tier_a_min": 902,
+   "tier_s_min": 964,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0285",
+   "material_type": "Mineral",
+   "tier_f_min": 348,
+   "tier_e_min": 523,
+   "tier_d_min": 686,
+   "tier_c_min": 717,
+   "tier_b_min": 861,
+   "tier_a_min": 916,
+   "tier_s_min": 975,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0286",
+   "material_type": "Mineral",
+   "tier_f_min": 287,
+   "tier_e_min": 578,
+   "tier_d_min": 656,
+   "tier_c_min": 723,
+   "tier_b_min": 881,
+   "tier_a_min": 937,
+   "tier_s_min": 969,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0287",
+   "material_type": "Mineral",
+   "tier_f_min": null,
+   "tier_e_min": 554,
+   "tier_d_min": 647,
+   "tier_c_min": 716,
+   "tier_b_min": 880,
+   "tier_a_min": 909,
+   "tier_s_min": 959,
+   "tier_perfect": 1000,
+   "notes": "F-tier value not listed in source - treat readings below E as unknown/F"
+  },
+  {
+   "item_id": "I0221",
+   "material_type": "Mineral",
+   "tier_f_min": 304,
+   "tier_e_min": 577,
+   "tier_d_min": 621,
+   "tier_c_min": 743,
+   "tier_b_min": 886,
+   "tier_a_min": 901,
+   "tier_s_min": 957,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0288",
+   "material_type": "Mineral",
+   "tier_f_min": 371,
+   "tier_e_min": 561,
+   "tier_d_min": 682,
+   "tier_c_min": 769,
+   "tier_b_min": 880,
+   "tier_a_min": 906,
+   "tier_s_min": 965,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0289",
+   "material_type": "Mineral",
+   "tier_f_min": 360,
+   "tier_e_min": 567,
+   "tier_d_min": 678,
+   "tier_c_min": 724,
+   "tier_b_min": 857,
+   "tier_a_min": 916,
+   "tier_s_min": 972,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0222",
+   "material_type": "Mineral",
+   "tier_f_min": 274,
+   "tier_e_min": 526,
+   "tier_d_min": 665,
+   "tier_c_min": 762,
+   "tier_b_min": 867,
+   "tier_a_min": 916,
+   "tier_s_min": 959,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0290",
+   "material_type": "Mineral",
+   "tier_f_min": 269,
+   "tier_e_min": 596,
+   "tier_d_min": 623,
+   "tier_c_min": 732,
+   "tier_b_min": 898,
+   "tier_a_min": 929,
+   "tier_s_min": 964,
+   "tier_perfect": 1000,
+   "notes": null
+  },
+  {
+   "item_id": "I0291",
+   "material_type": "Mineral",
+   "tier_f_min": 258,
+   "tier_e_min": 510,
+   "tier_d_min": 688,
+   "tier_c_min": 797,
+   "tier_b_min": 865,
+   "tier_a_min": 940,
+   "tier_s_min": 971,
+   "tier_perfect": 1000,
+   "notes": null
+  }
+ ],
+ "systems": [
+  {
+   "system_id": "SYS1",
+   "name": "Stanton",
+   "status": "Live",
+   "notes": "Human core system; org's likely home base"
+  },
+  {
+   "system_id": "SYS2",
+   "name": "Pyro",
+   "status": "Live",
+   "notes": "Lawless system beyond Stanton, reached via jump point"
+  },
+  {
+   "system_id": "SYS3",
+   "name": "Nyx",
+   "status": "Live",
+   "notes": "Third live system, added Alpha 4.4; hub city Levski on Delamar"
+  },
+  {
+   "system_id": "SYS4",
+   "name": "Terra",
+   "status": "Planned / not yet playable",
+   "notes": "Announced system, not live as of Sept 2026 - placeholder only"
+  }
+ ],
+ "planets": [
+  {
+   "planet_id": "PL01",
+   "parent_system_id": "SYS1",
+   "name": "ArcCorp"
+  },
+  {
+   "planet_id": "PL02",
+   "parent_system_id": "SYS1",
+   "name": "Crusader"
+  },
+  {
+   "planet_id": "PL03",
+   "parent_system_id": "SYS1",
+   "name": "Hurston"
+  },
+  {
+   "planet_id": "PL04",
+   "parent_system_id": "SYS1",
+   "name": "microTech"
+  },
+  {
+   "planet_id": "PL05",
+   "parent_system_id": "SYS2",
+   "name": "Bloom (Pyro III)"
+  },
+  {
+   "planet_id": "PL06",
+   "parent_system_id": "SYS2",
+   "name": "Monox (Pyro II)"
+  },
+  {
+   "planet_id": "PL07",
+   "parent_system_id": "SYS2",
+   "name": "Pyro I"
+  },
+  {
+   "planet_id": "PL08",
+   "parent_system_id": "SYS2",
+   "name": "Pyro V"
+  },
+  {
+   "planet_id": "PL09",
+   "parent_system_id": "SYS2",
+   "name": "Terminus (Pyro VI)"
+  },
+  {
+   "planet_id": "PL10",
+   "parent_system_id": "SYS3",
+   "name": "Nyx I"
+  },
+  {
+   "planet_id": "PL11",
+   "parent_system_id": "SYS3",
+   "name": "Nyx II"
+  },
+  {
+   "planet_id": "PL12",
+   "parent_system_id": "SYS3",
+   "name": "Nyx III"
+  },
+  {
+   "planet_id": "PLNONE",
+   "parent_system_id": null,
+   "name": "No Planet / Not Applicable"
+  }
+ ],
+ "location_types": [
+  {
+   "location_type_id": "LT101",
+   "parent_system_id": "SYS1",
+   "name": "Space Station"
+  },
+  {
+   "location_type_id": "LT102",
+   "parent_system_id": "SYS1",
+   "name": "City (Landing Zone)"
+  },
+  {
+   "location_type_id": "LT103",
+   "parent_system_id": "SYS1",
+   "name": "Outpost"
+  },
+  {
+   "location_type_id": "LT104",
+   "parent_system_id": "SYS1",
+   "name": "Mining Area / Facility"
+  },
+  {
+   "location_type_id": "LT201",
+   "parent_system_id": "SYS2",
+   "name": "Space Station"
+  },
+  {
+   "location_type_id": "LT202",
+   "parent_system_id": "SYS2",
+   "name": "Outpost"
+  },
+  {
+   "location_type_id": "LT203",
+   "parent_system_id": "SYS2",
+   "name": "Asteroid Base"
+  },
+  {
+   "location_type_id": "LT301",
+   "parent_system_id": "SYS3",
+   "name": "Space Station"
+  },
+  {
+   "location_type_id": "LT302",
+   "parent_system_id": "SYS3",
+   "name": "City (Landing Zone)"
+  },
+  {
+   "location_type_id": "LT401",
+   "parent_system_id": "SYS4",
+   "name": "Not yet available"
+  }
+ ],
+ "locations": [
+  {
+   "location_id": "LOC0001",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL03",
+   "name": "Everus Harbor",
+   "planet_or_body": "Hurston",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0002",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL01",
+   "name": "Baijini Point",
+   "planet_or_body": "ArcCorp",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0003",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL04",
+   "name": "Port Tressler",
+   "planet_or_body": "microTech",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0004",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL02",
+   "name": "Seraphim Station",
+   "planet_or_body": "Crusader",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0005",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL02",
+   "name": "Grim Hex",
+   "planet_or_body": "Yela (Crusader)",
+   "notes": "Outlaw hideout station"
+  },
+  {
+   "location_id": "LOC0006",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL02",
+   "name": "CRU-L1",
+   "planet_or_body": "Crusader (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0007",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL02",
+   "name": "CRU-L4",
+   "planet_or_body": "Crusader (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0008",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL02",
+   "name": "CRU-L5",
+   "planet_or_body": "Crusader (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0009",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL01",
+   "name": "ARC-L1",
+   "planet_or_body": "ArcCorp (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0010",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL01",
+   "name": "ARC-L2",
+   "planet_or_body": "ArcCorp (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0011",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL01",
+   "name": "ARC-L3",
+   "planet_or_body": "ArcCorp (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0012",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL01",
+   "name": "ARC-L4",
+   "planet_or_body": "ArcCorp (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0013",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL01",
+   "name": "ARC-L5",
+   "planet_or_body": "ArcCorp (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0014",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL03",
+   "name": "HUR-L1",
+   "planet_or_body": "Hurston (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0015",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL03",
+   "name": "HUR-L2",
+   "planet_or_body": "Hurston (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0016",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL03",
+   "name": "HUR-L3",
+   "planet_or_body": "Hurston (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0017",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL03",
+   "name": "HUR-L4",
+   "planet_or_body": "Hurston (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0018",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL03",
+   "name": "HUR-L5",
+   "planet_or_body": "Hurston (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0019",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL04",
+   "name": "MIC-L1",
+   "planet_or_body": "microTech (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0020",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL04",
+   "name": "MIC-L2",
+   "planet_or_body": "microTech (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0021",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL04",
+   "name": "MIC-L3",
+   "planet_or_body": "microTech (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0022",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL04",
+   "name": "MIC-L4",
+   "planet_or_body": "microTech (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0023",
+   "parent_location_type_id": "LT101",
+   "parent_planet_id": "PL04",
+   "name": "MIC-L5",
+   "planet_or_body": "microTech (Lagrange point)",
+   "notes": "Designator confirmed; verify current full station name in-game before import"
+  },
+  {
+   "location_id": "LOC0024",
+   "parent_location_type_id": "LT102",
+   "parent_planet_id": "PL03",
+   "name": "Lorville",
+   "planet_or_body": "Hurston",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0025",
+   "parent_location_type_id": "LT102",
+   "parent_planet_id": "PL01",
+   "name": "Area18",
+   "planet_or_body": "ArcCorp",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0026",
+   "parent_location_type_id": "LT102",
+   "parent_planet_id": "PL04",
+   "name": "New Babbage",
+   "planet_or_body": "microTech",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0027",
+   "parent_location_type_id": "LT102",
+   "parent_planet_id": "PL02",
+   "name": "Orison",
+   "planet_or_body": "Crusader",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0028",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL02",
+   "name": "Hickes Research Outpost",
+   "planet_or_body": "Cellin (Crusader)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0029",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL02",
+   "name": "Terra Mills HydroFarm",
+   "planet_or_body": "Cellin (Crusader)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0030",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL02",
+   "name": "Deakins Research Outpost",
+   "planet_or_body": "Yela (Crusader)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0031",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Bezdek",
+   "planet_or_body": "Arial (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0032",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Lathan",
+   "planet_or_body": "Arial (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0033",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Anderson",
+   "planet_or_body": "Aberdeen (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0034",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Norgaard",
+   "planet_or_body": "Aberdeen (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0035",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Ryder",
+   "planet_or_body": "Ita (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0036",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Woodruff",
+   "planet_or_body": "Ita (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0037",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Perlman",
+   "planet_or_body": "Magda (Hurston)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0038",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Edmond",
+   "planet_or_body": "Hurston (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0039",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Hadley",
+   "planet_or_body": "Hurston (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0040",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Oparei",
+   "planet_or_body": "Hurston (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0041",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Pinewood",
+   "planet_or_body": "Hurston (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0042",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Stanhope",
+   "planet_or_body": "Hurston (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0043",
+   "parent_location_type_id": "LT103",
+   "parent_planet_id": "PL03",
+   "name": "HDMS-Thedus",
+   "planet_or_body": "Hurston (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0044",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL01",
+   "name": "Shubin Mining Facility SAL-2",
+   "planet_or_body": "Lyria (ArcCorp)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0045",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL01",
+   "name": "Shubin Mining Facility SAL-5",
+   "planet_or_body": "Lyria (ArcCorp)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0046",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL01",
+   "name": "ArcCorp Mining Area 045",
+   "planet_or_body": "Wala (ArcCorp)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0047",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL01",
+   "name": "ArcCorp Mining Area 048",
+   "planet_or_body": "Wala (ArcCorp)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0048",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL01",
+   "name": "ArcCorp Mining Area 056",
+   "planet_or_body": "Wala (ArcCorp)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0049",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL01",
+   "name": "ArcCorp Mining Area 061",
+   "planet_or_body": "Wala (ArcCorp)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0050",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL02",
+   "name": "ArcCorp Mining Area 141",
+   "planet_or_body": "Daymar (Crusader)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0051",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL02",
+   "name": "Shubin Mining Facility SCD-1",
+   "planet_or_body": "Daymar (Crusader)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0052",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL02",
+   "name": "ArcCorp Mining Area 157",
+   "planet_or_body": "Yela (Crusader)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0053",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL04",
+   "name": "Shubin Mining Facility SMCa-6",
+   "planet_or_body": "Calliope (microTech)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0054",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL04",
+   "name": "Shubin Mining Facility SMCa-8",
+   "planet_or_body": "Calliope (microTech)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0055",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL04",
+   "name": "Shubin Mining Facility SM0-18",
+   "planet_or_body": "microTech (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0056",
+   "parent_location_type_id": "LT104",
+   "parent_planet_id": "PL04",
+   "name": "Shubin Mining Facility SM0-22",
+   "planet_or_body": "microTech (surface)",
+   "notes": null
+  },
+  {
+   "location_id": "LOC0057",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Checkmate Station",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0058",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Dudley & Daughters",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0059",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Endgame",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0060",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Gaslight",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0061",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Megumi Refueling",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0062",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Orbituary",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0063",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Patch City",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0064",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Rat's Nest",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0065",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Rod's Fuel 'N Supplies",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0066",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Ruin Station",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0067",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Starlight Service Station",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0068",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Stanton Gateway (Pyro)",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0069",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "Nyx Gateway (Pyro)",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0070",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "PYAM-EXHANG-0-1",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0071",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "PYAM-SUPVISR-3-4",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0072",
+   "parent_location_type_id": "LT201",
+   "parent_planet_id": "PLNONE",
+   "name": "PYAM-SUPVISR-3-5",
+   "planet_or_body": "Pyro system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0073",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Alpha",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0074",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Bravo",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0075",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Charlie",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0076",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Cook",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0077",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Delta",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0078",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Echo",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0079",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Foxtrot",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0080",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Gulf",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0081",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Helio",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0082",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Ignition",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0083",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Ion",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0084",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Jak",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0085",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Kilo",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0086",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Lamda",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0087",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Lynx",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0088",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Mat",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0089",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-November",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0090",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Over",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0091",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Point",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0092",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Roth",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0093",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Tung",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0094",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Quagmire",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0095",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Sierra",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0096",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Ultra",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0097",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Victory",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0098",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Whiskey",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0099",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Xeno",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0100",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-York",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0101",
+   "parent_location_type_id": "LT203",
+   "parent_planet_id": "PLNONE",
+   "name": "RAB-Zeta",
+   "planet_or_body": "Pyro system (asteroid belts)",
+   "notes": "Sits in an asteroid cluster, not in orbit of a specific planet"
+  },
+  {
+   "location_id": "LOC0102",
+   "parent_location_type_id": "LT301",
+   "parent_planet_id": "PLNONE",
+   "name": "People's Service Station Alpha",
+   "planet_or_body": "Nyx system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0103",
+   "parent_location_type_id": "LT301",
+   "parent_planet_id": "PLNONE",
+   "name": "People's Service Station Delta",
+   "planet_or_body": "Nyx system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0104",
+   "parent_location_type_id": "LT301",
+   "parent_planet_id": "PLNONE",
+   "name": "People's Service Station Lambda",
+   "planet_or_body": "Nyx system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0105",
+   "parent_location_type_id": "LT301",
+   "parent_planet_id": "PLNONE",
+   "name": "People's Service Station Theta",
+   "planet_or_body": "Nyx system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0106",
+   "parent_location_type_id": "LT301",
+   "parent_planet_id": "PLNONE",
+   "name": "Pyro Gateway (Nyx)",
+   "planet_or_body": "Nyx system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0107",
+   "parent_location_type_id": "LT301",
+   "parent_planet_id": "PLNONE",
+   "name": "QV Services Stations",
+   "planet_or_body": "Nyx system",
+   "notes": "Planet/body association not confirmed this session - verify in-game before relying on it"
+  },
+  {
+   "location_id": "LOC0108",
+   "parent_location_type_id": "LT302",
+   "parent_planet_id": "PLNONE",
+   "name": "Levski",
+   "planet_or_body": "Delamar (Nyx)",
+   "notes": "Built into a mining facility on Delamar, a large asteroid - not a planet"
+  }
+ ]
+}

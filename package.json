@@ -1,0 +1,23 @@
+{
+  "name": "sc-org-inventory-bot",
+  "version": "0.1.0",
+  "description": "Discord bot for Star Citizen org inventory management (Phase 1: officer commands, member sync, logs)",
+  "main": "src/index.js",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "deploy-commands": "node scripts/deploy-commands.js",
+    "bot": "node src/index.js",
+    "start": "node scripts/migrate.js && node scripts/seed.js && node scripts/deploy-commands.js && node src/index.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.27.0",
+    "dotenv": "^17.4.2",
+    "pg": "^8.23.0"
+  }
+}
